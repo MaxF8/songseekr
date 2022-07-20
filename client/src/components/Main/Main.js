@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from 'react';
-
+import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom"
 import "./Main.css"
 import SpotifyConnection from "../../pages/SpotifyConnection"
-import SpotifyPlaylistData from "../../pages/SpotifyPlaylistData"
+import SpotifyAlbumData from "../../pages/SpotifyAlbumData"
+import SpotifyLikedData from "../../pages/SpotifyLikedData"
+import PlaylistData from "../../pages/PlaylistData"
+import SongData from "../../pages/SongData"
+
+
+
+
+import UserPlaylists from "../../pages/UserPlaylists"
 import useAuth from '../../hooks/useAuth';
 import SpotifyWebApi from 'spotify-web-api-node';
 
@@ -56,30 +64,36 @@ const Main = ({code}) =>{
 //   })
 
     return(
-
-         <div className="Main">Spotify App!
-            {/* <h1> <a href="http://localhost:8888/login">Login</a> to Spotify</h1> */}
-            {/* <SpotifyConnection/> */}
-{/*            
-            {console.log(isLoggedin)}
-            {!isLoggedin ? (
-                <>
-                    <div>logged out</div>
-                    <button type="submit" onClick={login}>login</button>
-                </>
-            ):
-            (
-                <>
-                    <div>logged in</div>
-                    <button onClick={logout}>logout user</button>
-                    <SpotifyPlaylistData />
-
-                </>
-            )
-            } */}
-            <div>logged in</div>
+         <div className="Main">
             <button onClick={logout}>logout user</button>
-            <SpotifyPlaylistData />
+            {/* <div>Main</div> */}
+            
+            {/* <div>logged in</div> */}
+                
+            <Routes>
+                <Route path="/" element={
+                    <div>
+                        <div>
+                            <Link to = "/playlists">Playlists</Link>
+                        </div>
+                        <div>
+                            <Link to = "/albums">Albums</Link>
+                        </div>  
+                        <div>
+                            <Link to = "/liked">Liked Songs</Link>
+                        </div>
+                    </div>
+                } /> 
+
+                <Route path="/playlists" element={<UserPlaylists />} /> 
+                <Route path="/albums" element={<SpotifyAlbumData />} /> 
+                <Route path="/liked" element={<SpotifyLikedData />} /> 
+
+                <Route path="/playlistData" element={<PlaylistData />} />
+                <Route path="/SongData" element={<SongData />} /> 
+
+
+            </Routes>
         </div>
     )
 }

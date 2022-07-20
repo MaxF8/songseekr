@@ -1,7 +1,7 @@
 // import React, { useEffect } from 'react';
 // import "./SpotifyConnection.css"
 
-// import SpotifyPlaylistData from "../SpotifyPlaylistData"
+// import UserPlaylists from "../UserPlaylists"
 
 
 // const SpotifyConnection = () => {
@@ -22,7 +22,7 @@
 
 //     return (
 //         <div className="SpotifyConnection">
-//         <SpotifyPlaylistData />
+//         <UserPlaylists />
 
 //       </div>
 //     )

@@ -1,7 +1,7 @@
 window.env = {
   "ALLUSERSPROFILE": "C:\\ProgramData",
   "APPDATA": "C:\\Users\\mxef8\\AppData\\Roaming",
-  "CHROME_CRASHPAD_PIPE_NAME": "\\\\.\\pipe\\crashpad_4116_NPKZJGTFXCQHSEPK",
+  "CHROME_CRASHPAD_PIPE_NAME": "\\\\.\\pipe\\crashpad_25668_NCYJRLNKDHVDWFLS",
   "COLOR": "1",
   "COLORTERM": "truecolor",
   "CommonProgramFiles": "C:\\Program Files\\Common Files",
@@ -70,7 +70,7 @@ window.env = {
   "SystemRoot": "C:\\WINDOWS",
   "TEMP": "C:\\Users\\mxef8\\AppData\\Local\\Temp",
   "TERM_PROGRAM": "vscode",
-  "TERM_PROGRAM_VERSION": "1.69.1",
+  "TERM_PROGRAM_VERSION": "1.69.2",
   "TMP": "C:\\Users\\mxef8\\AppData\\Local\\Temp",
   "USERDOMAIN": "MAXF-PC",
   "USERDOMAIN_ROAMINGPROFILE": "MAXF-PC",
