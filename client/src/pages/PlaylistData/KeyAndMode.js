@@ -3,7 +3,24 @@ import axios from 'axios'
 import {useLocation} from "react-router-dom"
 import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom"
 
-
+const numberToLetterConverter = {
+    "0": "C",
+    "1": "C#",
+    "2": "D",
+    "3": "D#",
+    "4": "E",
+    "5": "F",
+    "6": "F#",
+    "7": "G",
+    "8": "G#",
+    "9": "A",
+    "10": "A#",
+    "11": "B",
+}
+const minorOrMajor = {
+    "0": "Minor",
+    "1": "Major",
+}
 
 
 const KeyAndMode = (props) =>
@@ -51,8 +68,7 @@ const KeyAndMode = (props) =>
 
     return(
         <>
-         {props.isKeyTrue ? <>{data.key}</>: <>{data.mode}</>}
-        
+         {props.isKeyTrue ? <>{numberToLetterConverter[data.key]}</>: <>{minorOrMajor[data.mode]}</>}
         </>
     )
 }

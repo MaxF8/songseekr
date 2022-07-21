@@ -8,10 +8,11 @@ import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom"
 const SongData = (props) => {
   const location = useLocation();
   const state = location.state;
+  console.log(state);
   // const playlistID = state.id
     return (
         <>  
-          <div>song data!!!</div>
+          <div>Song: {state.track.name}</div>
         </>
     )
 }
