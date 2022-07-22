@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import {  Link } from "react-router-dom";
 import "./NavBar.css"
 import { Nav } from "react-bootstrap";
-// const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/playlists/?limit=25";
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 
+// const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/playlists/?limit=25";
+import About from "../../pages/About"
 
 const NavBar  = () => {
     
@@ -27,6 +29,10 @@ const NavBar  = () => {
         </li> */}
       </ul>
       </div>
+      <Routes>
+        <Route path="/about" element={<About />} /> 
+      </Routes>
+
     </Nav>
   )
 }

@@ -9,7 +9,9 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
-a {
+
+/*gets rid of link colors */
+a { 
   color: inherit;
   text-decoration: none;
 }
