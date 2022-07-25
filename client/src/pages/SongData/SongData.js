@@ -5,7 +5,8 @@ import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom"
 
 
 
-const SongData = (props) => {
+
+const SongData = () => {
   const location = useLocation();
   const state = location.state;
   console.log(state);

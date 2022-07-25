@@ -1,4 +1,4 @@
-
+/* 
 body {
   margin: 0;
   padding: 0;
@@ -33,14 +33,7 @@ li {
   padding: 10px;
   line-height: 80px;
 }
-/* .nav-links {
-  color: white;
-  text-decoration: none;
-}
-.nav-links-mobile {
-  color: white;
-  text-decoration: none;
-} */
+
 li:hover {
   background-color: white;
 }
@@ -49,4 +42,4 @@ li:hover .nav-links {
 }
 li:hover .nav-links-mobile {
   color: black;
-}
+} */

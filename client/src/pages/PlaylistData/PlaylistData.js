@@ -19,28 +19,94 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+const listOfSongFeatures = (querySting) => {
+  // console.log(querySting)
+  const SONG_FEATURES_ENDPOINT = `https://api.spotify.com/v1/audio-features?ids=${querySting}`;
+    // console.log(props)
+    // console.log(`id: ${id}`);
+    // setToken(localStorage.getItem("access_token"));
+    // console.log(`token (song features): ${token}`)
+    axios
+      .get(SONG_FEATURES_ENDPOINT, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("access_token"),
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        // console.log("audio feature request")
+        // console.log(response.data.audio_features)
+
+        const data = response.data.audio_features;
+
+        const listOfIDs = {};
+
+        for (let x in data){ 
+          // listOfIDs[x] = data[x]
+          // console.log(data[x].key)
+          listOfIDs[x] = {
+            [data[x].key ] : data[x].mode
+          }
+          // console.log(`${data[x].track.id} and ${data[x].track.name}`);
+        }
+        // console.log("undef?")
+
+        // console.log(listOfIDs)
+        // let result = response.data
+        // //   console.log(Object.keys(result[0].track))
+        // for (let x in result)
+        // {
+        //     console.log(result[x].audio_features)
+        // }
+        // console.log("playlist data: "+JSON.stringify(response.data))
+        // setData(response.data);
+        console.log(listOfIDs)
+        return listOfIDs;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+}
+
+const getAllTrackIDs = (data) => {
+  const listOfIDs = {};
+
+  let queryStingOfIds = ""
+  for (let x in data){ 
+    queryStingOfIds += data[x].track.id + ",";
+  }
+
+  // console.log("songs!:");
+  // console.log(listOfIDs )
+
+  return queryStingOfIds.slice(0, -1);;
+};
+
 const PlaylistData = (props) => {
   const location = useLocation();
   const state = location.state;
   const playlistID = state.id;
   // console.log(Object.keys(state));
-  console.log(playlistID);
+  // console.log(playlistID);
 
   const PLAYLISTS_ENDPOINT = `https://api.spotify.com/v1/playlists/${playlistID}/tracks`;
 
   const [token, setToken] = useState("");
   const [data, setData] = useState({});
+  // const [audioFeatures, setAudioFeatures] = useState({});
+
   // const [Key, setKey] = useState("");
   // const [Mode, setMode] = useState("");
 
   useEffect(() => {
-    console.log(`tracks from playlist id ${state.name}`);
+    // console.log(`tracks from playlist id ${state.name}`);
 
     // if (localStorage.getItem("access_token")) {
     setToken(localStorage.getItem("access_token"));
     // }
     //
-    console.log(`token: ${localStorage.getItem("access_token")}`);
+    // console.log(`token: ${localStorage.getItem("access_token")}`);
     axios
       .get(PLAYLISTS_ENDPOINT, {
         headers: {
@@ -49,17 +115,24 @@ const PlaylistData = (props) => {
         },
       })
       .then((response) => {
-        console.log("playlist data");
-
         let result = response.data.items;
-        console.log(Object.keys(result[0].track));
-        console.log(response.data.items);
+        // console.log(Object.keys(result[0].track));
+        // console.log(response.data.items);
 
-        for (let x in result) {
-          console.log(result[x].track.name);
-        }
-        // console.log("playlist data: "+JSON.stringify(response.data))
+        // for (let x in result) {
+        //   // console.log(result[x].track.name);
+        // }
+        // // console.log("playlist data: "+JSON.stringify(response.data))
+        // const IDs = getAllTrackIDs(response.data.items);
+        // // console.log("did it work?")
+        // console.log("--")
+        
+        // console.log(IDs)
+        // const returnedAudioFeatures = listOfSongFeatures(IDs);
+        // console.log(returnedAudioFeatures)
+        // console.log("___")
 
+        // setAudioFeatures(listOfSongFeatures(IDs))
         setData(response.data);
       })
       .catch((error) => {
@@ -68,6 +141,9 @@ const PlaylistData = (props) => {
   }, [token]); //data????
   return (
     <>
+    {/* {console.log("!!!!!")} */}
+
+    {/* {console.log(audioFeatures)} */}
       <Table>
         <TableHead>
           <TableRow>
@@ -104,9 +180,6 @@ const PlaylistData = (props) => {
                 );
               })
             : null}
-
-          {/* } */}
-          {/* </TableRow> */}
         </TableBody>
       </Table>
     </>

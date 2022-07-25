@@ -8,6 +8,17 @@ import Login from "./components/Login";
 // import { Container } from './styles/App.styles';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import NavBar from "./components/NavBar";
+import About from "./pages/About";
+// import Contact from "./pages/Contact";
+
+import UserPlaylists from "./pages/UserPlaylists";
+import SpotifyAlbumData from "./pages/SpotifyAlbumData";
+import SpotifyLikedData from "./pages/SpotifyAlbumData";
+import PlaylistData from "./pages/PlaylistData";
+import SongData from "./pages/SongData";
+
+
+
 
 const App = () => {
   const code = new URLSearchParams(window.location.search).get("code");
@@ -15,17 +26,34 @@ const App = () => {
   console.log(`code: ${code}`);
   return (
     <Router>
-      <NavBar />
-      <div>
-        {code ? (
-          <div>
-            <Main code={code} />
-            {/* <div>d</div> */}
-          </div>
-        ) : (
-          <Login />
-        )}
-      </div>
+
+      <NavBar/>
+      <Routes>
+
+      <Route path="/" element ={
+        <div>
+          {code ? (
+            /*if code is true, you are logged in*/
+            <div> 
+              <Main code={code} />
+              {/* <div>d</div> */}
+            </div> 
+          ) : ( 
+            /*if code is false, you are logged out*/
+            <Login/>    
+          )}
+        </div>
+      } />
+      <Route path="/about" element={<About/>} /> 
+      {/* <Route path="/contact" element={<Contact/>} />  */}
+
+      <Route path="/playlists" element={<UserPlaylists/>}/> 
+      <Route path="/albums" element={<SpotifyAlbumData/>} /> 
+      <Route path="/liked" element={<SpotifyLikedData />} /> 
+      <Route path="/playlistData" element={<PlaylistData />} />
+      <Route path="/SongData" element={<SongData />} /> 
+      </Routes>
+
     </Router>
   );
 };

@@ -6,7 +6,7 @@ import SpotifyAlbumData from "../../pages/SpotifyAlbumData"
 import SpotifyLikedData from "../../pages/SpotifyLikedData"
 import PlaylistData from "../../pages/PlaylistData"
 import SongData from "../../pages/SongData"
-
+import About from "../../pages/About"
 
 
 
@@ -29,6 +29,7 @@ const Main = ({code}) =>{
     // console.log(`MAIN, token: ${accessToken}`);
 
     useEffect(() => {
+
         if (!accessToken) return;
         spotifyApi.setAccessToken(accessToken);
       }, [accessToken]);
@@ -69,7 +70,6 @@ const Main = ({code}) =>{
             {/* <div>Main</div> */}
             
             {/* <div>logged in</div> */}
-                
             <Routes>
                 <Route path="/" element={
                     <div>
@@ -82,16 +82,9 @@ const Main = ({code}) =>{
                         <div>
                             <Link to = "/liked">Liked Songs</Link>
                         </div>
+                       
                     </div>
                 } /> 
-
-                <Route path="/playlists" element={<UserPlaylists />} /> 
-                <Route path="/albums" element={<SpotifyAlbumData />} /> 
-                <Route path="/liked" element={<SpotifyLikedData />} /> 
-
-                <Route path="/playlistData" element={<PlaylistData />} />
-                <Route path="/SongData" element={<SongData />} /> 
-
 
             </Routes>
         </div>
