@@ -7,12 +7,13 @@ import SpotifyLikedData from "../../pages/SpotifyLikedData"
 import PlaylistData from "../../pages/PlaylistData"
 import SongData from "../../pages/SongData"
 import About from "../../pages/About"
-
+import {Container, InputGroup, FormControl, Button, Row, Card} from "react-bootstrap"
 
 
 import UserPlaylists from "../../pages/UserPlaylists"
 import useAuth from '../../hooks/useAuth';
 import SpotifyWebApi from 'spotify-web-api-node';
+import Search from '../Search';
 
 //login/logout
 
@@ -67,12 +68,13 @@ const Main = ({code}) =>{
     return(
          <div className="Main">
             <button onClick={logout}>logout user</button>
-            {/* <div>Main</div> */}
-            
-            {/* <div>logged in</div> */}
             <Routes>
                 <Route path="/" element={
                     <div>
+                        <div>
+                            <Link to = "/search">Search</Link>
+                            <Search/>
+                        </div>
                         <div>
                             <Link to = "/playlists">Playlists</Link>
                         </div>

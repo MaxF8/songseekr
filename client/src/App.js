@@ -4,6 +4,8 @@ import React from "react";
 // import Login from './Login';
 import Main from "./components/Main";
 import Login from "./components/Login";
+import Footer from "./components/Footer";
+
 // import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // import { Container } from './styles/App.styles';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
@@ -17,6 +19,7 @@ import SpotifyLikedData from "./pages/SpotifyAlbumData";
 import PlaylistData from "./pages/PlaylistData";
 import SongData from "./pages/SongData";
 
+import { Card } from 'react-bootstrap';
 
 
 
@@ -28,6 +31,7 @@ const App = () => {
     <Router>
 
       <NavBar/>
+
       <Routes>
 
       <Route path="/" element ={
@@ -53,8 +57,11 @@ const App = () => {
       <Route path="/playlistData" element={<PlaylistData />} />
       <Route path="/SongData" element={<SongData />} /> 
       </Routes>
-
+      <Footer />
+      
     </Router>
+    
+
   );
 };
 export default App;
