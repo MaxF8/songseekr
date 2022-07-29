@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+
 import axios from "axios";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
@@ -6,6 +8,9 @@ import ImageListItemBar from "@mui/material/ImageListItemBar";
 import ListSubheader from "@mui/material/ListSubheader";
 import IconButton from "@mui/material/IconButton";
 import InfoIcon from "@mui/icons-material/Info";
+import MUIButton from "@mui/material/Button";
+import MUIContainer from "@mui/material/Container";
+import Box from "@mui/material/Box";
 import "./Search.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
@@ -73,7 +78,7 @@ const Search = () => {
 
   return (
     <div className="Search">
-      <Container>
+      <MUIContainer>
         <InputGroup className="mb-3" size="lg">
           <FormControl
             placeholder="Search Here"
@@ -93,24 +98,33 @@ const Search = () => {
               // console.log(artists)
             }}
           >
+
             Search
           </Button>
+
         </InputGroup>
-      </Container>
-      <Container>
+        {/* why box?, container?? */}
+      </MUIContainer>
+      <MUIContainer maxWidth="md">
         <ImageList
-          gap={12}
+          gap={25}
           cols={3}
           sx={{
             mb: 8,
             gridTemplateColumns:
               "repeat(auto-fill, minmax(280px, 1fr))!important",
           }}
+          // sx={{ width: 500, height: 450}}
+          // mb= {8}
+          // gridTemplateColumns:
+          //   "repeat(auto-fill, minmax(280px, 1fr))!important",
         >
           {artists.map((artist, i) => {
             return (
               <ImageListItem
                 sx={{ height: "100% !important" }}
+                // columns = {3}
+
                 key={artist.name}
               >
                 <img
@@ -122,11 +136,12 @@ const Search = () => {
                 />
                 <ImageListItemBar title={artist.name} />
               </ImageListItem>
-            );  
+            );
           })}
         </ImageList>
-      </Container>
+      </MUIContainer>
     </div>
+
   );
 };
 

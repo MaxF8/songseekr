@@ -5,6 +5,8 @@ import React from "react";
 import Main from "./components/Main";
 import Login from "./components/Login";
 import Footer from "./components/Footer";
+import HomePage from "./components/HomePage";
+
 
 // import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // import { Container } from './styles/App.styles';
@@ -19,9 +21,8 @@ import SpotifyLikedData from "./pages/SpotifyAlbumData";
 import PlaylistData from "./pages/PlaylistData";
 import SongData from "./pages/SongData";
 
-import { Card } from 'react-bootstrap';
-
-
+import { Card } from "react-bootstrap";
+import LoginPage from "./components/LoginPage";
 
 const App = () => {
   const code = new URLSearchParams(window.location.search).get("code");
@@ -29,39 +30,36 @@ const App = () => {
   console.log(`code: ${code}`);
   return (
     <Router>
-
-      <NavBar/>
+      <NavBar />
 
       <Routes>
+        <Route
+           exact 
+          path="/"
+          element={ 
+            <div>
+              {code ? (
+                /*if code is true, you are logged in*/
+                <div>
+                  <Main code={code} />
+                  <HomePage/>
+                </div>
+              ) : (
+                /*if code is false, you are logged out*/
+                <LoginPage />
+              )}
+            </div>
+           } 
+        /> 
+        <Route path="/about" element={<About />} />
+        <Route path="/playlists" element={<UserPlaylists/>}/>  
 
-      <Route path="/" element ={
-        <div>
-          {code ? (
-            /*if code is true, you are logged in*/
-            <div> 
-              <Main code={code} />
-              {/* <div>d</div> */}
-            </div> 
-          ) : ( 
-            /*if code is false, you are logged out*/
-            <Login/>    
-          )}
-        </div>
-      } />
-      <Route path="/about" element={<About/>} /> 
-      {/* <Route path="/contact" element={<Contact/>} />  */}
+        </Routes>
 
-      <Route path="/playlists" element={<UserPlaylists/>}/> 
-      <Route path="/albums" element={<SpotifyAlbumData/>} /> 
-      <Route path="/liked" element={<SpotifyLikedData />} /> 
-      <Route path="/playlistData" element={<PlaylistData />} />
-      <Route path="/SongData" element={<SongData />} /> 
-      </Routes>
+
+
       <Footer />
-      
     </Router>
-    
-
   );
 };
 export default App;

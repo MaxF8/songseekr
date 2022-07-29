@@ -10,6 +10,7 @@ import {
   FaLinkedin
 } from 'react-icons/fa';
 import {
+  LogoIcon,
   FooterContainer,
   FooterSubscription,
   FooterSubText,
@@ -39,7 +40,7 @@ const Footer  = () => {
         <SocialMedia>
           <SocialMediaWrap>
             <SocialLogo to='/'>
-              <SocialIcon />
+              <LogoIcon />
               Spotify App
             </SocialLogo>
             <SocialIcons>

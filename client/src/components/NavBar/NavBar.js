@@ -6,7 +6,6 @@ import Main from "../Main"
 // import {  Link } from "react-router-dom";
 // import "./NavBar.css"
 // import { Nav } from "react-bootstrap";
-import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 
 import About from "../../pages/About"
 
@@ -65,9 +64,8 @@ const NavBar  = () => {
             {click ? <FaTimes /> : <FaBars />}
           </MobileIcon>
           <NavMenu onClick={handleClick} click={click}>
-            <NavItem>
+          <NavItem>
               <NavLinks to='/' onClick={closeMobileMenu}>
-
                 Home
               </NavLinks>
             </NavItem>
@@ -76,6 +74,23 @@ const NavBar  = () => {
                 About
               </NavLinks>
             </NavItem>
+          <NavItem>
+              <NavLinks to='/playlists' onClick={closeMobileMenu}>
+                Playlists
+              </NavLinks>
+            </NavItem>
+            <NavItem>
+              <NavLinks to='/Liked Songs' onClick={closeMobileMenu}>
+                Liked Songs
+              </NavLinks>
+            </NavItem>
+            <NavItem>
+              <NavLinks to='/Albums' onClick={closeMobileMenu}>
+                Albums
+              </NavLinks>
+            </NavItem>
+
+           
             {/* <NavItem>
               <NavLinks to='/contact' onClick={closeMobileMenu}>
                 Contact
@@ -87,7 +102,7 @@ const NavBar  = () => {
                   <Button onClick={goToAUTH_URL} primary> Log In </Button>
                 </NavBtnLink>
               ) : (
-                <NavBtnLink to='/sign-up'>
+                <NavBtnLink to='/'>
                   <Button onClick={closeMobileMenu} fontBig primary>
                   Log In
                   </Button>
@@ -112,9 +127,7 @@ const NavBar  = () => {
       
       </ul>
       </div>
-      <Routes>
-        <Route path="/about" element={<About />} /> 
-      </Routes>
+     
 
     </Nav> */}
   </>

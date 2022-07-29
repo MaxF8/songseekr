@@ -27,6 +27,8 @@
 // 
 import styled, { createGlobalStyle } from 'styled-components';
 
+
+
 const GlobalStyle = createGlobalStyle`
   * {
   box-sizing: border-box;
@@ -52,12 +54,12 @@ export const Container = styled.div`
 `;
 
 export const Button = styled.button`
-  border-radius: 4px;
+  border-radius: 5px;
   background: ${({ primary }) => (primary ? '#4B59F7' : '#0467FB')};
   white-space: nowrap;
-  padding: ${({ big }) => (big ? '12px 64px' : '10px 20px')};
+  padding: ${({ big }) => (big ? '10px 48px' : '8px 18px')};
   color: #fff;
-  font-size: ${({ fontBig }) => (fontBig ? '20px' : '16px')};
+  font-size: ${({ fontBig }) => (fontBig ? '18px' : '14px')};
   outline: none;
   border: none;
   cursor: pointer;
