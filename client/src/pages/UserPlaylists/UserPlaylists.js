@@ -9,7 +9,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
+
 import TableHead from "@material-ui/core/TableHead";
+import Container from "@material-ui/core/Container";
+import CssBaseline from '@mui/material/CssBaseline';
+import Box from '@mui/material/Box';
+
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
@@ -24,7 +29,7 @@ const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/playlists/?limit=25";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: "100%",
+    width: "50%",
     marginTop: theme.spacing(3),
     overflowX: "auto",
   },
@@ -61,6 +66,27 @@ const UserPlaylists = (props) => {
 
   return (
     <>
+      {/* <Container>
+
+        Playlists
+      </Container> */}
+      {/* <Container maxWidth="sm" >a */}
+      <Box 
+      // borderColor="red"
+      // height={300}
+      // width={300}
+      minHeight="20vh"
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      // bgcolor="blue"
+      // color="white"
+      fontSize={24}>
+        
+      Your Playlists
+
+      </Box>
+      {/* </Container> */}
       <Table>
         <TableHead>
           <TableRow></TableRow>
