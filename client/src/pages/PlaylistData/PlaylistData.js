@@ -10,6 +10,8 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import Box from '@mui/material/Box';
+import Container from "@material-ui/core/Container";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -144,6 +146,22 @@ const PlaylistData = (props) => {
     {/* {console.log("!!!!!")} */}
 
     {/* {console.log(audioFeatures)} */}
+    <Box 
+      // borderColor="red"
+      // height={300}
+      // width={300}
+      minHeight="20vh"
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      // bgcolor="blue"
+      // color="white"
+      fontSize={24}>
+        
+      Playlist Data
+
+      </Box>
+      <Container maxWidth="md">
       <Table>
         <TableHead>
           <TableRow>
@@ -182,6 +200,7 @@ const PlaylistData = (props) => {
             : null}
         </TableBody>
       </Table>
+      </Container>
     </>
   );
 };

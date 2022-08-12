@@ -12,10 +12,13 @@ import {
   ImgWrapper,
   Img,
 } from "./HomePageStyle.js";
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 
 const HomePage = () => {
   return (
     <>
+    
       <InfoSec lightBg={false}>
         <Container>
           <InfoRow imgStart={""}>
@@ -43,9 +46,7 @@ const HomePage = () => {
               </TextWrapper>
             </InfoColumn>
             <InfoColumn>
-              {/* <ImgWrapper start={start}>
-                <Img src={img} alt={alt} />
-              </ImgWrapper> */}
+            
             </InfoColumn>
           </InfoRow>
         </Container>

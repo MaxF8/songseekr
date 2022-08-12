@@ -14,6 +14,11 @@ const useAuth = (code) => {
         } = await axios.post(`${process.env.REACT_APP_BASE_URL}/login`, {
           code,
         });
+        console.log("hook")
+        console.log(access_token);
+
+        console.log("^")
+
         setAccessToken(access_token);
         setRefreshToken(refresh_token);
         setExpiresIn(expires_in);

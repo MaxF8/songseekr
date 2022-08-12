@@ -23,7 +23,7 @@ import UserPlaylists from "../../pages/UserPlaylists";
 import useAuth from "../../hooks/useAuth";
 import SpotifyWebApi from "spotify-web-api-node";
 import Search from "../Search";
-
+import HomePage from "../HomePage";
 //login/logout
 
 const spotifyApi = new SpotifyWebApi({
@@ -73,10 +73,11 @@ const Main = ({ code }) => {
   //   })
 
   return (
-    <div className="Main">
-      {/* <Route exact path = "home" elements = {}/> */}
-      <button onClick={logout}>logout user</button>
-{/* 
+    <>
+      {/* <div className="Main"> */}
+        {/* <Route exact path = "home" elements = {}/> */}
+        {/* <button onClick={logout}>logout user</button> */}
+        {/* 
         <Box
           display="flex"
           justifyContent="center"
@@ -105,14 +106,18 @@ const Main = ({ code }) => {
                         <div>
                             <Link to = "/liked">Liked Songs</Link>
                         </div> */}
+                {/* <HomePage/> */}
+      {/* </div> */}
+
       <Routes>
-        <Route path="/playlists" element={<UserPlaylists />} />
-        <Route path="/albums" element={<SpotifyAlbumData />} />
-        <Route path="/liked" element={<SpotifyLikedData />} />
+        <Route path="/" element={<HomePage />}>Home page</Route>
         <Route path="/playlistData" element={<PlaylistData />} />
         <Route path="/SongData" element={<SongData />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/playlists" element={<UserPlaylists />} />
+        <Route path="/playlistData" element={<PlaylistData />} />
       </Routes>
-    </div>
+    </>
   );
 };
 

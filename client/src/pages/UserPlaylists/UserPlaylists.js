@@ -18,12 +18,17 @@ import Box from '@mui/material/Box';
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
-import ImageList from "@mui/material/ImageList";
-import ImageListItem from "@mui/material/ImageListItem";
-import ImageListItemBar from "@mui/material/ImageListItemBar";
+
 import ListSubheader from "@mui/material/ListSubheader";
 import IconButton from "@mui/material/IconButton";
 import InfoIcon from "@mui/icons-material/Info";
+
+//image list
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
+import ImageListItemBar from "@mui/material/ImageListItemBar";
+
+
 // import { Link } from 'react-router-dom';
 const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/playlists/?limit=25";
 
@@ -38,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
 const UserPlaylists = (props) => {
   const [token, setToken] = useState("");
   const [data, setData] = useState({});
+  const [artists, setArtists] = useState([]);
   useEffect(() => {
 
 
@@ -87,26 +93,47 @@ const UserPlaylists = (props) => {
 
       </Box>
       {/* </Container> */}
-      <Table>
-        <TableHead>
-          <TableRow></TableRow>
-        </TableHead>
-        <TableBody>
-          {data?.items
-            ? data.items.map((item) => {
-                return (
-                  <TableRow key={item.name}>
-                    <TableCell component="th" scope="row">
-                      <Link to="/playlistData" state={item}>
-                        {item.name}
-                      </Link>
-                    </TableCell>
-                  </TableRow>
-                );
-              })
-            : null}
-        </TableBody>
-      </Table>
+
+      <Container maxWidth="md">
+        <ImageList
+          gap={25}
+          cols={3}
+          sx={{
+            mb: 8,
+            gridTemplateColumns:
+              "repeat(auto-fill, minmax(280px, 1fr))!important",
+          }}
+          // sx={{ width: 500, height: 450}}
+          // mb= {8}
+          // gridTemplateColumns:
+          //   "repeat(auto-fill, minmax(280px, 1fr))!important",
+        >
+          {
+            data?.items?.map((artist, i) => {
+            return (
+              <Link to="/playlistData" state={artist}>
+
+              <ImageListItem
+                sx={{ height: "100% !important" }}
+                // columns = {3}
+                key={artist.name}
+              > 
+                <img
+                  src={`${artist?.images[0]?.url}?w=248&fit=crop&auto=format`}
+                  // srcSet={`${artist?.images[0]?.url}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                  alt=""
+                  loading="lazy"
+                  style={{ cursor: "pointer" }}
+                />
+                <ImageListItemBar title={artist.name} />
+
+              </ImageListItem>
+                </Link>
+
+            );
+          })}
+        </ImageList>
+      </Container>
     </>
   );
 };
