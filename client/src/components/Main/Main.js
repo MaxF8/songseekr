@@ -9,6 +9,7 @@ import SongData from "../../pages/SongData";
 import About from "../../pages/About";
 import MUIButton from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import PlaylistBuffer from "../PlaylistBuffer";
 
 import {
   Container,
@@ -59,6 +60,9 @@ const Main = ({ code }) => {
   //     setIsLoggedin(true);
 
   // }
+
+
+  
 
   const logout = () => {
     localStorage.clear();
@@ -111,11 +115,12 @@ const Main = ({ code }) => {
 
       <Routes>
         <Route path="/" element={<HomePage />}>Home page</Route>
+        {/* <Route path="/playlistData" element={<PlaylistData />} /> */}
         <Route path="/playlistData" element={<PlaylistData />} />
+
         <Route path="/SongData" element={<SongData />} />
         <Route path="/about" element={<About />} />
         <Route path="/playlists" element={<UserPlaylists />} />
-        <Route path="/playlistData" element={<PlaylistData />} />
       </Routes>
     </>
   );

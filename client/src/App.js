@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 // import Dashboard from './Dashboard';
 // import Login from './Login';
 import Main from "./components/Main";
-import Login from "./components/Login";
 import Footer from "./components/Footer";
 import HomePage from "./components/HomePage";
 import useAuth from "./hooks/useAuth";

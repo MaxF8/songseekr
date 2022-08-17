@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-
+import PlaylistBuffer from "../../components/PlaylistBuffer";
 import axios from "axios";
 import Song from "../../components/Song";
 import PlaylistData from "../../pages/PlaylistData";
@@ -43,10 +43,8 @@ const useStyles = makeStyles((theme) => ({
 const UserPlaylists = (props) => {
   const [token, setToken] = useState("");
   const [data, setData] = useState({});
-  const [artists, setArtists] = useState([]);
+  // const [artists, setArtists] = useState([]);
   useEffect(() => {
-
-
     setToken(localStorage.getItem("access_token"));
     axios
       .get(PLAYLISTS_ENDPOINT, {
