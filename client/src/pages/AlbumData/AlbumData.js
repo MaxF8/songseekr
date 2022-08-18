@@ -29,8 +29,10 @@ import ImageListItemBar from "@mui/material/ImageListItemBar";
 
 import Loader from 'react-loader-spinner'
 
+import SpotifyWebApi from "spotify-web-api-node";
+
 // import { Link } from 'react-router-dom';
-const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/playlists/?limit=25";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,34 +42,35 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UserPlaylists = (props) => {
+
+const spotifyApi = new SpotifyWebApi({
+  clientId: "95e0f40c7fa44e0e99e6ce9b6fd5fa32",
+});
+
+const AlbumData = (props) => {
   const [token, setToken] = useState("");
   const [data, setData] = useState({});
   // const [artists, setArtists] = useState([]);
   useEffect(() => {
+    console.log("album")
     setToken(localStorage.getItem("access_token"));
-    axios
-      .get(PLAYLISTS_ENDPOINT, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("access_token"),
-          "Content-Type": "application/json",
-        },
-      })
-      .then((response) => {
-  console.log("user playlists")
+    spotifyApi.setAccessToken(localStorage.getItem("access_token"));
+   
+   
+    spotifyApi.getMySavedAlbums()
+    .then(function(data) {
+      // Output items
+      console.log(data.body);
+      setData(data.body)
+    }, function(err) {
+      console.log('Something went wrong! (albums)', err);
+    });
 
-        let result = response.data;
-        console.log(result);
-        console.log("^")
-        // for (let playlist in result) {
-          // console.log(result[playlist].name);
-        // }
-        setData(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [token]);
+   
+   
+   
+  
+  }, []);
 
   return (
     <>
@@ -88,7 +91,7 @@ const UserPlaylists = (props) => {
       // color="white"
       fontSize={24}>
         
-      Your Playlists
+      Your Albums
 
       </Box>
       {/* </Container> */}
@@ -110,21 +113,21 @@ const UserPlaylists = (props) => {
           {
             data?.items?.map((artist, i) => {
             return (
-              <Link to="/playlistData" state={artist}>
-
+              <Link to="/playlistData" state={artist}> {/*get rid of "Artist */ }
+              {console.log(artist)}
               <ImageListItem
                 sx={{ height: "100% !important" }}
                 // columns = {3}
-                key={artist.name}
+                key={artist.album.name}
               > 
                 <img
-                  src={`${artist?.images[0]?.url}?w=248&fit=crop&auto=format`}
+                  src={`${artist?.album.images[0]?.url}?w=248&fit=crop&auto=format`}
                   // srcSet={`${artist?.images[0]?.url}?w=248&fit=crop&auto=format&dpr=2 2x`}
                   alt=""
                   loading="lazy"
                   style={{ cursor: "pointer" }}
                 />
-                <ImageListItemBar title={artist.name} />
+                <ImageListItemBar title={artist.album.name} />
 
               </ImageListItem>
                 </Link>
@@ -137,4 +140,4 @@ const UserPlaylists = (props) => {
   );
 };
 
-export default UserPlaylists;
+export default AlbumData;

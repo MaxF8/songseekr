@@ -13,6 +13,8 @@ import Paper from "@material-ui/core/Paper";
 import Box from "@mui/material/Box";
 import Container from "@material-ui/core/Container";
 import SpotifyWebApi from "spotify-web-api-node";
+import {ThreeDots} from 'react-loader-spinner';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -24,58 +26,6 @@ const useStyles = makeStyles((theme) => ({
 const spotifyApi = new SpotifyWebApi({
   clientId: "95e0f40c7fa44e0e99e6ce9b6fd5fa32",
 });
-
-// const listOfSongFeatures = async (querySting) => {
-//   // console.log(querySting)
-//   const SONG_FEATURES_ENDPOINT = `https://api.spotify.com/v1/audio-features?ids=${querySting}`;
-//   // console.log(props)
-//   // console.log(`id: ${id}`);
-//   // setToken(localStorage.getItem("access_token"));
-//   // console.log(`token (song features): ${token}`)
-
-//   const returned = await axios
-//     .get(SONG_FEATURES_ENDPOINT, {
-//       headers: {
-//         Authorization: "Bearer " + localStorage.getItem("access_token"),
-//         "Content-Type": "application/json",
-//       },
-//     })
-//     .then((response) => {
-//       // console.log("audio feature request")
-//       // console.log(response.data.audio_features)
-
-//       const data = response.data.audio_features;
-
-//       const listOfIDs = {};
-
-//       for (let x in data) {
-//         // listOfIDs[x] = data[x]
-//         // console.log(data[x].key)
-//         listOfIDs[x] = {
-//           [data[x].key]: data[x].mode,
-//         };
-//         // console.log(`${data[x].track.id} and ${data[x].track.name}`);
-//       }
-//       // console.log("undef?")
-
-//       // console.log(listOfIDs)
-//       // let result = response.data
-//       // //   console.log(Object.keys(result[0].track))
-//       // for (let x in result)
-//       // {
-//       //     console.log(result[x].audio_features)
-//       // }
-//       // console.log("playlist data: "+JSON.stringify(response.data))
-//       // setData(response.data);
-//       console.log(listOfIDs);
-//       // return listOfIDs;
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//     });
-
-//   return returned;
-// };
 
 const numberToLetterConverter = {
   0: "C",
@@ -135,34 +85,7 @@ const PlaylistData = (props) => {
   // const [Key, setKey] = useState("");
   // const [Mode, setMode] = useState("");
 
-  const getIDsAsync = async () => {
-    await spotifyApi.getPlaylist(playlistID.toString()).then(
-      function (data) {
-        console.log("data>>", data.body);
-        const IDsReturned = getAllTrackIDs(data.body.tracks.items);
-        setIDs(IDsReturned);
-        // console.log(data.body.tracks)
-        // console.log(IDs)
-        setData(data.body.tracks);
-        // console.log(Object.keys(data.body.items))
-
-        //       for (let x in data) {
-        //         // listOfIDs[x] = data[x]
-        //         // console.log(data[x].key)
-        //         listOfIDs[x] = {
-        //           [data[x].key]: data[x].mode,
-        //         };
-      },
-      function (err) {
-        console.log("Something went wrong!", err);
-      }
-    );
-    console.log("theData");
-
-    // console.log(theData);
-    console.log("is ^");
-  };
-
+  
   useEffect(() => {
     // console.log(`tracks from playlist id ${state.name}`);
 
@@ -208,7 +131,15 @@ const PlaylistData = (props) => {
   }, []); //data????
 
   if (isLoading) {
-    return <div className="App">Loading...</div>;
+    return <>
+    
+    <ThreeDots
+    // type="ThreeDots"
+    color="black"
+    height={100}
+    width={100}
+  /></>
+    {/* <div className="App">Loading...</div>; */}
   }
   return (
     <>

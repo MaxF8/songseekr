@@ -20,19 +20,28 @@ const LoginPage = () => {
 
   return (
     <>
-      <InfoSec lightBg={true}>
+      <InfoSec lightBg={false}>
         <Container>
           <InfoRow imgStart={""}>
             <InfoColumn>
               <TextWrapper>
-                <TopLine lightTopLine={true}>{"Exclusive Access"}</TopLine>
-                <Heading lightText={true}>{"Exclusive Access"}</Heading>
-                <Subtitle lightTextDesc={true}>{"Exclusive Access"}</Subtitle>
+                {/* <TopLine lightTopLine={true}>{"Exclusive Access"}</TopLine> */}
+                <Heading lightText={true}>
+                  {
+                    "Connect With Spotify to access musical information about your Spotify account "
+                  }
+                </Heading>
+                {/* <Subtitle lightTextDesc={true}>{"Exclusive Access"}</Subtitle> */}
                 <Button big fontBig primary={true} onclick="location.href=''">
-
-                  <a href= {AUTH_URL} >Login</a>
-                   
-                  </Button>
+                  <a
+                    href={AUTH_URL}
+                    style={{
+                      "text-decoration": "none",
+                    }}
+                  >
+                    Login
+                  </a>
+                </Button>
               </TextWrapper>
             </InfoColumn>
             <InfoColumn>

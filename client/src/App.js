@@ -16,8 +16,6 @@ import About from "./pages/About";
 // import Contact from "./pages/Contact";
 
 import UserPlaylists from "./pages/UserPlaylists";
-import SpotifyAlbumData from "./pages/SpotifyAlbumData";
-import SpotifyLikedData from "./pages/SpotifyAlbumData";
 import PlaylistData from "./pages/PlaylistData";
 import SongData from "./pages/SongData";
 

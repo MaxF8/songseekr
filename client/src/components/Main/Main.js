@@ -2,14 +2,13 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "./Main.css";
 import SpotifyConnection from "../../pages/SpotifyConnection";
-import SpotifyAlbumData from "../../pages/SpotifyAlbumData";
-import SpotifyLikedData from "../../pages/SpotifyLikedData";
+import AlbumData from "../../pages/AlbumData";
+import LikedSongData from "../../pages/LikedSongData";
 import PlaylistData from "../../pages/PlaylistData";
 import SongData from "../../pages/SongData";
 import About from "../../pages/About";
 import MUIButton from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import PlaylistBuffer from "../PlaylistBuffer";
 
 import {
   Container,
@@ -21,6 +20,7 @@ import {
 } from "react-bootstrap";
 
 import UserPlaylists from "../../pages/UserPlaylists";
+
 import useAuth from "../../hooks/useAuth";
 import SpotifyWebApi from "spotify-web-api-node";
 import Search from "../Search";
@@ -62,7 +62,7 @@ const Main = ({ code }) => {
   // }
 
 
-  
+
 
   const logout = () => {
     localStorage.clear();
@@ -121,6 +121,10 @@ const Main = ({ code }) => {
         <Route path="/SongData" element={<SongData />} />
         <Route path="/about" element={<About />} />
         <Route path="/playlists" element={<UserPlaylists />} />
+        <Route path="/albums" element={<AlbumData />} />
+        <Route path="/likedSongs" element={<LikedSongData />} />
+
+
       </Routes>
     </>
   );

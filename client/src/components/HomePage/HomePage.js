@@ -24,9 +24,9 @@ const HomePage = () => {
           <InfoRow imgStart={""}>
             <InfoColumn>
               <TextWrapper>
-                <TopLine lightTopLine={true}>{"Exclusive Access"}</TopLine>
-                <Heading lightText={true}>{"Exclusive Access"}</Heading>
-                <Subtitle lightTextDesc={true}>{"Exclusive Access"}</Subtitle>
+                {/* <TopLine lightTopLine={true}>{"Welcome"}</TopLine> */}
+                <Heading lightText={true}>{"Welcome!"}</Heading>
+                <Subtitle lightTextDesc={true}>{"Browse your Spotify Playlists, Albums or Liked Songs to access musical information from your music"}</Subtitle>
                 <Link to="/playlists">
                   <Button big fontBig primary={true}>
                     {"Playlists"}

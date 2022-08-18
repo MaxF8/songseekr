@@ -2,13 +2,13 @@ import styled from 'styled-components';
 
 export const InfoSec = styled.div`
   color: #fff;
-  padding: 160px 0;
+  padding: 140px 0;
   background: ${({ lightBg }) => (lightBg ? '#fff' : '#101522')};
 `;
 
 export const InfoRow = styled.div`
   display: flex;
-  margin: 0 -15px -15px -15px;
+  ${'' /* margin: 0 -15px -15px -15px; */}
   flex-wrap: wrap;
   align-items: center;
   flex-direction: ${({ imgStart }) => (imgStart ? 'row-reverse' : 'row')};
@@ -66,7 +66,7 @@ export const Img = styled.img`
 
 export const Heading = styled.h1`
   margin-bottom: 24px;
-  font-size: 48px;
+  font-size: 30px;
   line-height: 1.1;
   font-weight: 600;
   color: ${({ lightText }) => (lightText ? '#f7f8fa' : '#1c2237')};

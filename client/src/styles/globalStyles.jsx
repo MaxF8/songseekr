@@ -39,9 +39,15 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 export const Container = styled.div`
+display: flex;
+justify-content:center; 
+align-items:center; 
+${'' /* height: 100vh; // 100% view height
+width: 100vw; // 100% view width
+position: absolute; // so it goes behind the current content */}
   z-index: 1;
   width: 100%;
-  max-width: 1300px;
+  ${'' /* max-width: 1300px; */}
   margin-right: auto;
   margin-left: auto;
   padding-right: 50px;
