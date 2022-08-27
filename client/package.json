@@ -32,6 +32,13 @@
     "styled-components": "^5.3.5",
     "web-vitals": "^1.0.1"
   },
+  "engines": {
+    "node": "14.15.0"
+  },
+  "cacheDirectories": [
+    "node_modules",
+    "client/node_modules"
+  ],
   "scripts": {
     "start": "react-dotenv && react-scripts start",
     "build": "react-dotenv && react-scripts build",

@@ -39,7 +39,7 @@ const LoginPage = () => {
                       "text-decoration": "none",
                     }}
                   >
-                    Login
+                    Log In
                   </a>
                 </Button>
               </TextWrapper>

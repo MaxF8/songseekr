@@ -26,7 +26,7 @@ const HomePage = () => {
               <TextWrapper>
                 {/* <TopLine lightTopLine={true}>{"Welcome"}</TopLine> */}
                 <Heading lightText={true}>{"Welcome!"}</Heading>
-                <Subtitle lightTextDesc={true}>{"Browse your Spotify Playlists, Albums or Liked Songs to access musical information from your music"}</Subtitle>
+                <Subtitle lightTextDesc={true}>{"Browse your Spotify Playlists, Albums or Liked Songs to access musical information from your account."}</Subtitle>
                 <Link to="/playlists">
                   <Button big fontBig primary={true}>
                     {"Playlists"}

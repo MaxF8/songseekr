@@ -41,7 +41,7 @@ const Footer  = () => {
           <SocialMediaWrap>
             <SocialLogo to='/'>
               <LogoIcon />
-              Spotify App
+              spotnfind
             </SocialLogo>
             <SocialIcons>
               <SocialIconLink href='/' target='_blank' aria-label='Github'>

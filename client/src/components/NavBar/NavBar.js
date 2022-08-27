@@ -6,8 +6,20 @@ import Main from "../Main";
 // import {  Link } from "react-router-dom";
 // import "./NavBar.css"
 // import { Nav } from "react-bootstrap";
+// import logo from './../../public/images/Spot-N-Find.png'
+import Logo from '../../assets/Spot-N-Find.svg'
+import LogoWhite from '../../assets/Spot-N-FindWhite.svg'
+import LogoBlack from '../../assets/Spot-N-FindBlack.svg'
+
 
 import About from "../../pages/About";
+
+import SvgIcon from '@material-ui/core/SvgIcon';
+import Icon from '@material-ui/core/Icon';
+
+import { makeStyles } from '@material-ui/styles';
+
+
 
 import {
   Nav,
@@ -42,7 +54,7 @@ const NavBar = ({ code }) => {
     localStorage.clear();
     window.location.href = "/";
     console.log("logged out!");
-  }
+  };
   const goToAUTH_URL = () => {
     window.location.replace(AUTH_URL);
   };
@@ -59,52 +71,58 @@ const NavBar = ({ code }) => {
         <Nav>
           <NavbarContainer>
             <NavLogo to="/" onClick={closeMobileMenu}>
+
               <NavIcon />
-              Spotify App
+              <Icon>
+                  <img src={LogoBlack}  alt={"logo"}/>
+              </Icon>
+              {/* <SvgIcon>
+    <img src={LogoWhite} alt=""  />
+ </SvgIcon> */}
+              
+              {/* <Logo/> */}
+              spotnfind
+              {/* <img src={Logo} /> */}
             </NavLogo>
             {code ? (
               <>
-              <MobileIcon onClick={handleClick}>
-              {click ? <FaTimes /> : <FaBars />}
-            </MobileIcon>
-            <NavMenu onClick={handleClick} click={click}>
-              <NavItem>
-                <NavLinks to="/" onClick={closeMobileMenu}>
-                  Home
-                </NavLinks>
-              </NavItem>
-              <NavItem>
-                <NavLinks to="/about" onClick={closeMobileMenu}>
-                  About
-                </NavLinks>
-              </NavItem>
-              <NavItem>
-                <NavLinks to="/playlists" onClick={closeMobileMenu}>
-                  Playlists
-                </NavLinks>
-              </NavItem>
-              <NavItem>
-                <NavLinks to="/Liked Songs" onClick={closeMobileMenu}>
-                  Liked Songs
-                </NavLinks>
-              </NavItem>
-              <NavItem>
-                <NavLinks to="/Albums" onClick={closeMobileMenu}>
-                  Albums
-                </NavLinks>
-              </NavItem>
-
-          
-              <NavItemBtn>
-
-              {/* <NavBtnLink to= "/"> */}
+                <MobileIcon onClick={handleClick}>
+                  {click ? <FaTimes /> : <FaBars />}
+                </MobileIcon>
+                <NavMenu onClick={handleClick} click={click}>
+                  <NavItem>
+                    <NavLinks to="/" onClick={closeMobileMenu}>
+                      Home
+                    </NavLinks>
+                  </NavItem>
+                  <NavItem>
+                    <NavLinks to="/playlists" onClick={closeMobileMenu}>
+                      Playlists
+                    </NavLinks>
+                  </NavItem>
+                  <NavItem>
+                    <NavLinks to="/albums" onClick={closeMobileMenu}>
+                      Albums
+                    </NavLinks>
+                  </NavItem>
+                  <NavItem>
+                    <NavLinks to="/likedSongs" onClick={closeMobileMenu}>
+                      Liked Songs
+                    </NavLinks>
+                  </NavItem>{" "}
+                  <NavItem>
+                    <NavLinks to="/about" onClick={closeMobileMenu}>
+                      About
+                    </NavLinks>
+                  </NavItem>
+                  <NavItemBtn>
+                    {/* <NavBtnLink to= "/"> */}
                     <Button onClick={logout} primary>
                       Log Out
                     </Button>
-              {/* </NavBtnLink> */}
+                    {/* </NavBtnLink> */}
 
-
-                {/* {button ? (
+                    {/* {button ? (
                   <NavBtnLink >
                     <Button onClick={logout} primary>
                       Log Out
@@ -117,39 +135,32 @@ const NavBar = ({ code }) => {
                     </Button>
                   </NavBtnLink>
                 )} */}
-              </NavItemBtn>
-            </NavMenu>
-            </>
+                  </NavItemBtn>
+                </NavMenu>
+              </>
             ) : (
               <>
-              <MobileIcon onClick={handleClick}>
-              {click ? <FaTimes /> : <FaBars />}
-            </MobileIcon>
-              <NavMenu onClick={handleClick} click={click}>
-              <NavItem>
-                <NavLinks to="/about" onClick={closeMobileMenu}>
-                  About
-                </NavLinks>
-              </NavItem>
-             
-              <NavBtnLink to="/">
+                <MobileIcon onClick={handleClick}>
+                  {click ? <FaTimes /> : <FaBars />}
+                </MobileIcon>
+                <NavMenu onClick={handleClick} click={click}>
+                  <NavItem>
+                    <NavLinks to="/about" onClick={closeMobileMenu}>
+                      About
+                    </NavLinks>
+                  </NavItem>
+
+                  <NavBtnLink to="/">
                     <Button onClick={goToAUTH_URL} primary>
                       Log In
                     </Button>
                   </NavBtnLink>
-              </NavMenu>
+                </NavMenu>
               </>
-              )}
-
-            
-            
-          
-       
-            
+            )}
           </NavbarContainer>
         </Nav>
       </IconContext.Provider>
-      
     </>
   );
 };

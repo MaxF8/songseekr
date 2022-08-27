@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { FaMagento,FaMailchimp,FaDev } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { Container } from '../../styles/globalStyles';
+import Logo from '../../assets/Spot-N-Find.png'
+
 
 export const Nav = styled.nav`
   background: #101522;
@@ -19,7 +21,6 @@ export const NavbarContainer = styled(Container)`
   display: flex;
   justify-content: space-between;
   height: 80px;
-
   ${Container}
 `;
 
