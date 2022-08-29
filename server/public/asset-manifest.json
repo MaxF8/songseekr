@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/static/css/main.88a42b2a.chunk.css",
+    "main.js": "/static/js/main.cd23c98b.chunk.js",
+    "main.js.map": "/static/js/main.cd23c98b.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.32f4d21d.js",
+    "runtime-main.js.map": "/static/js/runtime-main.32f4d21d.js.map",
+    "static/css/2.984f751f.chunk.css": "/static/css/2.984f751f.chunk.css",
+    "static/js/2.5e19e943.chunk.js": "/static/js/2.5e19e943.chunk.js",
+    "static/js/2.5e19e943.chunk.js.map": "/static/js/2.5e19e943.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.984f751f.chunk.css.map": "/static/css/2.984f751f.chunk.css.map",
+    "static/css/main.88a42b2a.chunk.css.map": "/static/css/main.88a42b2a.chunk.css.map",
+    "static/js/2.5e19e943.chunk.js.LICENSE.txt": "/static/js/2.5e19e943.chunk.js.LICENSE.txt",
+    "static/media/Spot-N-Find.6dd45890.png": "/static/media/Spot-N-Find.6dd45890.png",
+    "static/media/Spot-N-Find.c98e288d.svg": "/static/media/Spot-N-Find.c98e288d.svg",
+    "static/media/Spot-N-FindBlack.487628b2.svg": "/static/media/Spot-N-FindBlack.487628b2.svg",
+    "static/media/Spot-N-FindWhite.ba37dc7e.svg": "/static/media/Spot-N-FindWhite.ba37dc7e.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.32f4d21d.js",
+    "static/css/2.984f751f.chunk.css",
+    "static/js/2.5e19e943.chunk.js",
+    "static/css/main.88a42b2a.chunk.css",
+    "static/js/main.cd23c98b.chunk.js"
+  ]
+}
