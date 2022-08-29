@@ -21,7 +21,7 @@ app.post('/login', async (req, res) => {
   const spotifyApi = new SpotifyWebApi({
     redirectUri: redirect_uri,
     clientId: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET,
+    clientSecret: process.env.CLIENT_SECRET, 
   });
 
   try {
