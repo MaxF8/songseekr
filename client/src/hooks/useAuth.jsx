@@ -6,15 +6,18 @@ const useAuth = (code) => {
   const [refreshToken, setRefreshToken] = useState();
   const [expiresIn, setExpiresIn] = useState();
 
+  const base_url = process.env.NODE_ENV === 'production' ? 'https://spotnfind.herokuapp.com' : 'http://localhost:3001'
+
   useEffect(() => {
     (async () => {
       try {
+        console.log("hook")
+
         const {
           data: { access_token, refresh_token, expires_in },
-        } = await axios.post(`${process.env.REACT_APP_BASE_URL}/login`, {
+        } = await axios.post(`${base_url}/login`, {
           code,
         });
-        console.log("hook")
         console.log(access_token);
 
         console.log("^")
@@ -38,7 +41,7 @@ const useAuth = (code) => {
       try {
         const {
           data: { access_token, expires_in },
-        } = await axios.post(`${process.env.REACT_APP_BASE_URL}/refresh`, {
+        } = await axios.post(`${base_url}/refresh`, {
           refreshToken,
         });
         setAccessToken(access_token);

@@ -22,37 +22,37 @@ import SongData from "./pages/SongData";
 import { Card } from "react-bootstrap";
 import LoginPage from "./components/LoginPage";
 
-export const AuthContext = React.createContext();
-const initialState = {
-  isAuthenticated: false,
-  token: null,
-};
+// export const AuthContext = React.createContext();
+// const initialState = {
+//   isAuthenticated: false,
+//   token: null,
+// };
 
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "LOGIN":
-      localStorage.setItem("token", JSON.stringify(action.payload.token));
-      return {
-        ...state,
-        isAuthenticated: true,
-        token: action.payload.token,
-      };
-    case "LOGOUT":
-      localStorage.clear();
-      return {
-        ...state,
-        isAuthenticated: false,
-      };
-    default:
-      return state;
-  }
-};
+// const reducer = (state, action) => {
+//   switch (action.type) {
+//     case "LOGIN":
+//       localStorage.setItem("token", JSON.stringify(action.payload.token));
+//       return {
+//         ...state,
+//         isAuthenticated: true,
+//         token: action.payload.token,
+//       };
+//     case "LOGOUT":
+//       localStorage.clear();
+//       return {
+//         ...state,
+//         isAuthenticated: false,
+//       };
+//     default:
+//       return state;
+//   }
+// };
 const App = () => {
   const code = new URLSearchParams(window.location.search).get("code");
   // const access_token = useAuth(code)
   console.log(`code: ${code}`);
 
-  const [state, dispatch] = React.useReducer(reducer, initialState);
+  // const [state, dispatch] = React.useReducer(reducer, initialState);
   const [token, setToken] = useState();
   const [loggedIn, setLoggedIn] = useState(false);
 
@@ -78,7 +78,7 @@ const App = () => {
         }}
       > */}
         <NavBar code = {code}/>
-
+      {/* {console.log("show up??")} */}
         <div>
           {/* {console.log(state.isAuthenticated)} */}
           {code ? (
