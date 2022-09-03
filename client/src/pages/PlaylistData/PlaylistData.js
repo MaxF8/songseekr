@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { useLocation } from "react-router-dom";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import KeyAndMode from "./KeyAndMode";
+import { BrowserRouter as Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -197,12 +195,10 @@ const PlaylistData = (props) => {
 
                       <TableCell>
                         {numberToLetterConverter[audioFeatures[x].key]}
-                        {/* <KeyAndMode id={item.track.id} isKeyTrue={true} /> */}
                       </TableCell>
                       <TableCell>
                         {minorOrMajor[audioFeatures[x].mode]}
 
-                        {/* <KeyAndMode id={item.track.id} isKeyTrue={false} /> */}
                       </TableCell>
                       <TableCell>{item.track.name}</TableCell>
                       <TableCell>{item.track.album.name}</TableCell>

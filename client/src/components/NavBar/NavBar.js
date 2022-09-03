@@ -2,22 +2,11 @@ import React, { useState, useEffect } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { IconContext } from "react-icons/lib";
 import { Button } from "../../styles/globalStyles";
-import Main from "../Main";
-// import {  Link } from "react-router-dom";
-// import "./NavBar.css"
-// import { Nav } from "react-bootstrap";
-// import logo from './../../public/images/Spot-N-Find.png'
-import Logo from '../../assets/Spot-N-Find.svg'
-import LogoWhite from '../../assets/Spot-N-FindWhite.svg'
 import LogoBlack from '../../assets/Spot-N-FindBlack.svg'
 
 
-import About from "../../pages/About";
-
-import SvgIcon from '@material-ui/core/SvgIcon';
 import Icon from '@material-ui/core/Icon';
 
-import { makeStyles } from '@material-ui/styles';
 
 
 

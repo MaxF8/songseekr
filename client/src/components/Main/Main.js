@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "./Main.css";
-import SpotifyConnection from "../../pages/SpotifyConnection";
 import AlbumData from "../../pages/AlbumData";
 import LikedSongData from "../../pages/LikedSongData";
 import PlaylistData from "../../pages/PlaylistData";
@@ -43,23 +42,6 @@ const Main = ({ code }) => {
     spotifyApi.setAccessToken(accessToken);
   }, [accessToken]);
 
-  //   useEffect(() => {
-  // console.log(`code!: ${code}`)
-
-  // console.log(localStorage.getItem("access_token"))
-  // const login = () =>{
-  //     window.location='http://localhost:8888/login';
-  //     console.log("logged in!")
-  //     const url = window.location.search
-  //     const params = new URLSearchParams(url);
-  //     localStorage.clear();
-
-  //     localStorage.setItem("access_token", params.get("access_token"))
-  //     localStorage.setItem("expires_in", params.get("expires_in"))
-
-  //     setIsLoggedin(true);
-
-  // }
 
 
 
@@ -69,49 +51,12 @@ const Main = ({ code }) => {
     window.location.href = "/";
     console.log("logged out!");
 
-    // localStorage.removeItem("access_token")
-    // localStorage.removeItem("expires_in")
-    // window.location.href = 'localhost:3000';
-    // setIsLoggedin(false);
+   
   };
-  //   })
 
   return (
     <>
-      {/* <div className="Main"> */}
-        {/* <Route exact path = "home" elements = {}/> */}
-        {/* <button onClick={logout}>logout user</button> */}
-        {/* 
-        <Box
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          // minHeight="10vh"
-        >
-          <Link to="playlists" style={{ textDecoration: "none" }}>
-            <MUIButton>Playlists</MUIButton>
-          </Link>
-          <Link to="albums" style={{ textDecoration: "none" }}>
-            <MUIButton>Albums</MUIButton>
-          </Link>
-          <Link to="liked" style={{ textDecoration: "none" }}>
-            <MUIButton>Liked Songs</MUIButton>
-          </Link>
-        </Box>
-        <div>
-          <Search />
-        </div> */}
-        {/* <div>
-                            <Link to = "/playlists">Playlists</Link>
-                        </div>
-                        <div>
-                            <Link to = "/albums">Albums</Link>
-                        </div>  
-                        <div>
-                            <Link to = "/liked">Liked Songs</Link>
-                        </div> */}
-                {/* <HomePage/> */}
-      {/* </div> */}
+    
 
       <Routes>
         <Route path="/" element={<HomePage />}>Home page</Route>

@@ -1,33 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import axios from "axios";
-import Song from "../../components/Song";
-import PlaylistData from "../../pages/PlaylistData";
+import { BrowserRouter as Link } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
 
-import TableHead from "@material-ui/core/TableHead";
 import Container from "@material-ui/core/Container";
-import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
-
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
-
-
-import ListSubheader from "@mui/material/ListSubheader";
-import IconButton from "@mui/material/IconButton";
-import InfoIcon from "@mui/icons-material/Info";
 
 //image list
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 
-import Loader from 'react-loader-spinner'
 
 import SpotifyWebApi from "spotify-web-api-node";
 

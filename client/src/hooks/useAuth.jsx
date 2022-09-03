@@ -6,7 +6,7 @@ const useAuth = (code) => {
   const [refreshToken, setRefreshToken] = useState();
   const [expiresIn, setExpiresIn] = useState();
 
-  const base_url = process.env.NODE_ENV === 'production' ? 'https://spotnfind.herokuapp.com' : 'http://localhost:3001'
+  const base_url = process.env.NODE_ENV === 'production' ? 'https://spotnfind.com' : 'http://localhost:3001'
 
   useEffect(() => {
     (async () => {
