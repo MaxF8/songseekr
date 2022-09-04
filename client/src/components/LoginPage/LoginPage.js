@@ -12,7 +12,7 @@ import {
   ImgWrapper,
   Img,
 } from "./LoginPageStyle.js";
-const redirect_uri = process.env.NODE_ENV === 'production' ? 'https://spotnfind.com' : 'http://localhost:3000'
+const redirect_uri = process.env.NODE_ENV === 'production' ? 'https://spotnfind.com' : 'https://localhost:3000'
 
 const LoginPage = () => {
   console.log(process.env.REACT_APP_CLIENT_ID);
