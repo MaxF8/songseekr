@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Box from '@mui/material/Box';
 
+  
 //image list
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 
+import Loader from 'react-loader-spinner'
 
 import SpotifyWebApi from "spotify-web-api-node";
 
