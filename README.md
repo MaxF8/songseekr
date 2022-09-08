@@ -2,7 +2,7 @@
 
 This is a project I designed to help users find musical information about their music in Spotify quickly. 
 
-I used React, Node JS, and Material UI to create the application and Heroku to delploy.
+I used React, Node JS, and Material UI to create the application and Heroku to deploy.
 
 If you would like to access this project on your device follow the following instructions:
 
