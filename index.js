@@ -8,7 +8,7 @@ const app = express();
 app.use(express.static(path.join(__dirname, './client/build')))
 dotenv.config();
 const redirect_uri = process.env.NODE_ENV === 'production' ? 'https://spotnfind.com' : 'http://localhost:3000'
-
+  //
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
