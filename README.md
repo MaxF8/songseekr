@@ -1,12 +1,13 @@
 # songseekr
 
-This is a project I designed to help users find musical information about their music in Spotify quickly. 
+songseekr is a personalized web application I designed to help users find music information about their favorite tracks on Spotify.
 
-I used React, Node JS, and Material UI to create the application and Vercel to deploy.
+## Technologies Used
 
-If you would like to access this project on your device follow the following instructions:
+- **React**: Utilized for building the user interface.
+- **Node.js**: Used for server-side scripting.
+- **Material UI**: Integrated for styling and responsive design.
+- **Vercel**: Deployed using Vercel for seamless serverless deployment.
+- **Spotify Web API**: Integrated to fetch musical information.
 
-- Create a spotify developer account, go to https://developer.spotify.com/dashboard/login and create an app
-- Install react, node JS and all dependencies included in both client/package.json and package.json
-- Replace clientID and clientSecret fields with your own or create environment vaiables for them
 
