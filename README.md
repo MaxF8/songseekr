@@ -1,6 +1,6 @@
 # songseekr
 
-songseekr is a personalized web application I designed to help users find music information about their favorite tracks on Spotify.
+songseekr is a personalized web application I designed to help users find musical information about their favorite tracks on Spotify.
 
 ## Technologies Used
 
