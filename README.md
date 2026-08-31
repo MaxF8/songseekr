@@ -1,6 +1,6 @@
-# SongSeekr
+# songseekr
 
-SongSeekr turns Spotify catalog and library data into music-practice references. Search for a
+songseekr turns Spotify catalog and library data into music-practice references. Search for a
 track, inspect its detected key when Spotify makes audio features available, and open matching
 pentatonic scale, chord, and guitar-fretboard diagrams.
 
@@ -71,11 +71,11 @@ Deployments should run the same `npm run check` command used by CI before releas
 ## Spotify API limitations
 
 Spotify may deny Audio Features access to newer development-mode applications or omit features
-for individual tracks. SongSeekr treats `403` and `404` feature responses as unavailable and keeps
+for individual tracks. songseekr treats `403` and `404` feature responses as unavailable and keeps
 the rest of the catalog or library page usable. Playlist items use Spotify's current `items`
 endpoint and retain a compatibility fallback for older accounts.
 
-Spotify sessions can expire or be revoked. When refreshing is no longer possible, SongSeekr clears
+Spotify sessions can expire or be revoked. When refreshing is no longer possible, songseekr clears
 its session cookies and asks the user to reconnect.
 
 ## Privacy and security
@@ -84,10 +84,10 @@ its session cookies and asks the user to reconnect.
 - Spotify access and refresh tokens are scoped to `/api` cookies and are never exposed to React.
 - API requests are rate-limited and outbound Spotify requests time out.
 - Responses include CSP, clickjacking, MIME-sniffing, referrer, and permissions protections.
-- Disconnecting clears SongSeekr's local session cookies. Spotify account access can also be
+- Disconnecting clears songseekr's local session cookies. Spotify account access can also be
   revoked from the user's Spotify Apps settings.
 
-SongSeekr does not maintain its own user database. It processes Spotify catalog and library data
+songseekr does not maintain its own user database. It processes Spotify catalog and library data
 to render the requested page and does not intentionally persist that data server-side.
 
 ## License

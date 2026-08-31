@@ -32,7 +32,7 @@ function ProtectedRoute() {
       <main className="page page--centered">
         <section className="panel empty-state" aria-labelledby="signin-heading">
           <h1 id="signin-heading">Connect to view your library</h1>
-          <p>Your library stays behind SongSeekr’s server-side Spotify session.</p>
+          <p>Your library stays behind songseekr’s server-side Spotify session.</p>
           <a
             className="button button--primary"
             href={`/api/auth/start?returnTo=${encodeURIComponent(location.pathname)}`}

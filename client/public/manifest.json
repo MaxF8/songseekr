@@ -1,6 +1,6 @@
 {
-  "short_name": "SongSeekr",
-  "name": "SongSeekr music practice tool",
+  "short_name": "songseekr",
+  "name": "songseekr music practice tool",
   "start_url": "/",
   "display": "standalone",
   "theme_color": "#101522",

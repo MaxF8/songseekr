@@ -94,7 +94,7 @@ export default function NavBar() {
             <SheetHeader className="mobile-sheet__header">
               <SheetTitle className="sr-only">Menu</SheetTitle>
               <SheetDescription className="sr-only">
-                Navigate around SongSeekr.
+                Navigate around songseekr.
               </SheetDescription>
               <SheetClose asChild>
                 <Button className="mobile-sheet__close" variant="ghost" size="icon" aria-label="Close menu">

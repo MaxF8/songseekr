@@ -42,7 +42,7 @@ function ScaleReferences({ audioFeature }) {
       <section className="status-alert" aria-labelledby="scale-heading">
         <h2 id="scale-heading">Practice references unavailable</h2>
         <p>
-          Spotify did not return a reliable key for this track, so SongSeekr will not guess which
+          Spotify did not return a reliable key for this track, so songseekr will not guess which
           scale to show.
         </p>
       </section>

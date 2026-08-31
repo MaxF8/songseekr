@@ -8,7 +8,7 @@ export default class ErrorBoundary extends Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    console.error("SongSeekr render failure", error, errorInfo);
+    console.error("songseekr render failure", error, errorInfo);
   }
 
   render() {
@@ -18,7 +18,7 @@ export default class ErrorBoundary extends Component {
       <main className="page page--centered">
         <section className="panel empty-state" role="alert">
           <h1>This page could not be displayed</h1>
-          <p>Reload the page. If the problem continues, return to SongSeekr’s home page.</p>
+          <p>Reload the page. If the problem continues, return to songseekr’s home page.</p>
           <div className="button-row">
             <button className="button button--primary" onClick={() => window.location.reload()}>
               Reload

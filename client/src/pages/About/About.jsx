@@ -18,8 +18,7 @@ export default function About() {
       />
       <h1>About Me</h1>
       <p>
-        Hi 👋, my name is Max Friedman. I’m a software engineering student currently pursuing a
-        BS in Computer Science.
+        Hi 👋, my name is Max Friedman. I’m a software engineer!
       </p>
       <p>
         I made this app as a helpful tool to enhance my own guitar playing when playing my favorite

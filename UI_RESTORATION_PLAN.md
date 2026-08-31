@@ -1,4 +1,4 @@
-# SongSeekr UI Restoration Plan
+# songseekr UI Restoration Plan
 
 Status: **planning only — no UI implementation is authorized yet**  
 Prepared: 2026-08-30  
@@ -6,16 +6,16 @@ Approval required before any item below is implemented.
 
 ## 1. Goal
 
-Restore SongSeekr's original identity and page compositions as closely as possible while retaining the backend, security, routing, accessibility, responsive behavior, and useful data presentation added during the recent rebuild.
+Restore songseekr's original identity and page compositions as closely as possible while retaining the backend, security, routing, accessibility, responsive behavior, and useful data presentation added during the recent rebuild.
 
 The four supplied screenshots are the primary visual source of truth. The checked-in original source is secondary evidence. When the current redesign conflicts with those screenshots, the screenshots win.
 
-The intended result should feel like the original SongSeekr made more reliable and usable—not like a newly generated dashboard, SaaS landing page, or design-system demo.
+The intended result should feel like the original songseekr made more reliable and usable—not like a newly generated dashboard, SaaS landing page, or design-system demo.
 
 ## 2. Non-negotiable product decisions
 
 1. Restore the original dark navy, bright blue, white, and muted gray visual language.
-2. Restore the SongSeekr icon and lowercase underlined `songseekr` wordmark in the header.
+2. Restore the songseekr icon and lowercase underlined `songseekr` wordmark in the header.
 3. Restore the original desktop navigation structure and a proper hamburger/close-icon mobile menu.
 4. Keep a functional search field on the front page.
 5. Search must run while the user types, not require a Search-button click.
@@ -24,7 +24,7 @@ The intended result should feel like the original SongSeekr made more reliable a
 8. Keep the current album-detail track table as the basis for album track presentation; it is the strongest part of the new UI.
 9. Do not place album/playlist previous/next arrows at the top of a page. Any real pagination belongs below its list and uses plain text controls.
 10. Display an official Spotify logo on every page/surface that displays Spotify-sourced information.
-11. Use shadcn components where they improve behavior and accessibility, but restyle them to SongSeekr. shadcn must not dictate the site's appearance.
+11. Use shadcn components where they improve behavior and accessibility, but restyle them to songseekr. shadcn must not dictate the site's appearance.
 12. Preserve the rebuilt server-side Spotify session, API proxy, security work, routes, error handling, and tests. This is a visual restoration, not a technical rollback.
 13. No broad redesign or new visual concept will be introduced without explicit approval.
 
@@ -45,7 +45,7 @@ The current app was inspected in source and in a running browser at desktop and 
 
 | ID | Severity | Area | Confirmed problem | Required correction |
 | --- | --- | --- | --- | --- |
-| UI-01 | Critical | Brand | The icon and lowercase wordmark were replaced by plain `SongSeekr` text. | Restore the original icon plus underlined lowercase wordmark and make the full mark link home. |
+| UI-01 | Critical | Brand | The icon and lowercase wordmark were replaced by plain `songseekr` text. | Restore the original icon plus underlined lowercase wordmark and make the full mark link home. |
 | UI-02 | Critical | Global style | Most content was moved to a pale radial-gradient page with generic panels, large radii, shadows, and tight display typography. | Return the page canvas to solid original navy and use restrained light surfaces only where data or diagrams require them. |
 | UI-03 | High | Home | The original Connect/home composition was replaced and the front-page search was removed or reduced to a submit form in different iterations. | Rebuild the screenshot composition and keep a real typeahead input on the front page. |
 | UI-04 | Critical | Search | Typing `Little Wing` produced no request or results; results appeared only after clicking Search. | Search automatically after typing with debounce and stale-request cancellation. |
@@ -113,7 +113,7 @@ Remove the current radial gradient, translucent/blurred header treatment, decora
 
 Recreate the supplied header:
 
-- Left: original square SongSeekr icon plus underlined lowercase `songseekr` wordmark.
+- Left: original square songseekr icon plus underlined lowercase `songseekr` wordmark.
 - Right, logged out: `Connect`, `Search`, `About` as simple original-blue buttons.
 - Right, logged in: `Home`, `Playlists`, `Albums`, `Liked Songs`, `Search`, `About`, and `Log Out`, with the least-used items allowed to become plain links if all-blue buttons become crowded.
 - Solid navy background; no blur or frosted border.
@@ -238,7 +238,7 @@ Restore the supplied About screenshot rather than rewriting it:
 - Centered `About Me` heading.
 - Restore the two original paragraphs:
   - Introduction: Max Friedman and the BS in Computer Science.
-  - Purpose: SongSeekr was made to support guitar playing with favorite tracks and be useful to others.
+  - Purpose: songseekr was made to support guitar playing with favorite tracks and be useful to others.
 - Restore `Links` with Portfolio, LinkedIn, and GitHub.
 - Keep the modest original layout and text width; do not turn it into a biography card, timeline, resume grid, or project-marketing page.
 
@@ -249,7 +249,7 @@ The current portrait files are deliberately ignored as “unused legacy assets.�
 - Keep server-side authentication and current retry/reconnect behavior.
 - Replace giant centered light panels with compact dark-page messages.
 - Use direct headings such as `Connect to view your library` and one blue action.
-- Use shadcn `Alert` and `Skeleton` only for accessible behavior and consistent spacing; visually restyle them to SongSeekr.
+- Use shadcn `Alert` and `Skeleton` only for accessible behavior and consistent spacing; visually restyle them to songseekr.
 - Keep errors actionable and do not expose raw server details.
 - Keep the 404 useful, but remove the oversized joke-card presentation.
 
@@ -277,7 +277,7 @@ The current official `Full_Logo_White_RGB.svg` asset should be retained unmodifi
 - Song detail centers the logo below the musical information, as shown in the original screenshot.
 - Album, playlist, liked-song, and library pages place it below the populated list/table.
 - The global footer may remain as a site-wide fallback, but it does not replace local attribution when data is displayed inside a bounded results surface.
-- Keep the official logo's proportions, colors, and clear space. Do not recolor, crop, stretch, mask, or combine it with the SongSeekr logo.
+- Keep the official logo's proportions, colors, and clear space. Do not recolor, crop, stretch, mask, or combine it with the songseekr logo.
 - Keep relevant `Open in Spotify` links for albums/tracks/playlists.
 - Do not place controls or text over Spotify artwork. Preserve the source artwork aspect ratio and avoid unnecessary cropping.
 - Keep the independent-tool/non-affiliation statement concise in the global footer.
@@ -288,7 +288,7 @@ No shadcn/Tailwind packages or generated files will be added until this plan is 
 
 After approval, initialize shadcn for the existing Vite React client and add only the components actually used:
 
-| shadcn primitive | SongSeekr use | Visual constraint |
+| shadcn primitive | songseekr use | Visual constraint |
 | --- | --- | --- |
 | `Button` | Connect, nav actions, retry, logout, pagination | Original blue rectangle, small radius; no pill treatment. |
 | `Input` | Home and search typeahead | White input, original compact dimensions, blue focus ring. |
@@ -301,7 +301,7 @@ After approval, initialize shadcn for the existing Vite React client and add onl
 
 Components intentionally not planned: generic `Card` wrappers for every section, carousel, hero, badge-heavy UI, dashboard navigation, breadcrumb bars, and decorative dialogs.
 
-shadcn is source code in this repository, so its classes and tokens will be edited to the exact SongSeekr contract above rather than retaining the default theme.
+shadcn is source code in this repository, so its classes and tokens will be edited to the exact songseekr contract above rather than retaining the default theme.
 
 ## 10. Responsive and accessibility requirements
 
@@ -321,7 +321,7 @@ shadcn is source code in this repository, so its classes and tokens will be edit
 ### Phase 1 — Freeze reference and tokens
 
 - Save the supplied screenshots as the visual baseline outside production assets.
-- Restore the exact SongSeekr logo asset.
+- Restore the exact songseekr logo asset.
 - Introduce original color/type/spacing tokens and remove the current gradient/display-theme rules.
 - Initialize the minimum shadcn setup and theme its primitives.
 
@@ -368,7 +368,7 @@ The likely files/components to change after approval are:
 - `client/src/components/ui/TrackTable.jsx`, `Pagination.jsx`, and `AsyncState.jsx`.
 - Album, playlist, liked-song, song-detail, About, and NotFound page components.
 - Footer/Spotify attribution component(s).
-- Restored SongSeekr logo and tracked/optimized About portrait assets.
+- Restored songseekr logo and tracked/optimized About portrait assets.
 - Focused interaction and responsive tests.
 
 Server OAuth/session/API files are explicitly out of scope unless a UI test reveals a real integration defect.
@@ -400,4 +400,3 @@ Implementation is complete only when all statements below are true:
 Approval of this document authorizes implementation of the restoration above, including the minimal shadcn setup. It does not authorize a different redesign.
 
 Before the About links are finalized, the exact Portfolio, LinkedIn, and GitHub URLs must be confirmed. Everything else can proceed from the supplied screenshots and existing application behavior once this plan is approved.
-
