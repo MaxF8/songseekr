@@ -2736,6 +2736,11 @@ h3 {
     stroke-width: 1.4;
   }
 
+  .pentatonic-box .fretboard {
+    width: 110%;
+    margin-inline: auto;
+  }
+
   .full-fretboard {
     overflow-x: visible;
     padding: 0.5rem 0;

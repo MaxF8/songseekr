@@ -20,9 +20,19 @@ function addScaleLabels(audioFeature, notes) {
   });
 }
 
-function FretboardSvg({ endFret, label, labelMode = "dots", notes, startFret, showInlays = false }) {
+function FretboardSvg({
+  endFret,
+  label,
+  labelMode = "dots",
+  notes,
+  preserveAspectRatio = "xMinYMid meet",
+  startFret,
+  showInlays = false,
+  uniformWidth = false,
+}) {
   const fretCount = endFret - startFret + 1;
-  const gridWidth = fretCount * FRET_WIDTH;
+  const gridWidth = (uniformWidth ? 5 : fretCount) * FRET_WIDTH;
+  const fretWidth = gridWidth / fretCount;
   const gridHeight = STRING_GAP * (STRING_LABELS.length - 1);
   const width = GRID_LEFT + gridWidth + 10;
   const height = GRID_TOP + gridHeight + 34;
@@ -37,7 +47,7 @@ function FretboardSvg({ endFret, label, labelMode = "dots", notes, startFret, sh
       viewBox={`0 0 ${width} ${height}`}
       role="img"
       aria-labelledby={titleId}
-      preserveAspectRatio="xMinYMid meet"
+      preserveAspectRatio={preserveAspectRatio}
     >
       <title id={titleId}>{label}</title>
 
@@ -60,7 +70,7 @@ function FretboardSvg({ endFret, label, labelMode = "dots", notes, startFret, sh
       })}
 
       {Array.from({ length: fretCount + 1 }, (_, index) => {
-        const x = GRID_LEFT + index * FRET_WIDTH;
+        const x = GRID_LEFT + index * fretWidth;
         return (
           <line
             className={index === 0 && startFret === 0 ? "fretboard__nut" : "fretboard__fret"}
@@ -91,7 +101,7 @@ function FretboardSvg({ endFret, label, labelMode = "dots", notes, startFret, sh
         })}
 
       {notes.map((note) => {
-        const x = GRID_LEFT + (note.fret - startFret + 0.5) * FRET_WIDTH;
+        const x = GRID_LEFT + (note.fret - startFret + 0.5) * fretWidth;
         const y = GRID_TOP + note.stringIndex * STRING_GAP;
         const noteLabel = labelMode === "notes" ? note.name : note.degree;
         return (
@@ -124,7 +134,7 @@ function FretboardSvg({ endFret, label, labelMode = "dots", notes, startFret, sh
           <text
             className="fretboard__fret-label"
             key={`label-${fret}`}
-            x={GRID_LEFT + (index + 0.5) * FRET_WIDTH}
+            x={GRID_LEFT + (index + 0.5) * fretWidth}
             y={GRID_TOP + gridHeight + 25}
             textAnchor="middle"
           >
@@ -175,6 +185,7 @@ export function PentatonicShapes({ audioFeature, labelMode = "dots" }) {
             endFret={box.endFret}
             labelMode={labelMode}
             notes={addScaleLabels(audioFeature, box.notes)}
+            uniformWidth
             label={`Pentatonic position ${box.position}, frets ${box.startFret} through ${box.endFret}`}
           />
         </figure>
