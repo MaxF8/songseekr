@@ -236,44 +236,44 @@ h3 {
   background: var(--navy);
 }
 
-:root:is(.song-route, .playlist-detail-route, .album-detail-route, .playlist-index-route, .album-index-route, .liked-songs-route, .home-route, .search-route, .about-route) .site-header {
+:root:is(.song-route, .playlist-detail-route, .album-detail-route, .playlist-index-route, .album-index-route, .liked-songs-route, .home-route, .search-route, .about-route, .not-found-route) .site-header {
   border-bottom-color: transparent;
   background: var(--artwork-hero-dark, #202a3b);
   color: #ffffff;
 }
 
-:root[data-theme="light"]:is(.song-route, .playlist-detail-route, .album-detail-route, .playlist-index-route, .album-index-route, .liked-songs-route, .home-route, .search-route, .about-route) .site-header {
+:root[data-theme="light"]:is(.song-route, .playlist-detail-route, .album-detail-route, .playlist-index-route, .album-index-route, .liked-songs-route, .home-route, .search-route, .about-route, .not-found-route) .site-header {
   background: var(--artwork-hero-light, #dce7ef);
   color: #0a0a0a;
 }
 
-:root:is(.song-route, .playlist-detail-route, .album-detail-route, .playlist-index-route, .album-index-route, .liked-songs-route, .home-route, .search-route, .about-route) .site-header .brand,
-:root:is(.song-route, .playlist-detail-route, .album-detail-route, .playlist-index-route, .album-index-route, .liked-songs-route, .home-route, .search-route, .about-route) .site-header .nav-link,
-:root:is(.song-route, .playlist-detail-route, .album-detail-route, .playlist-index-route, .album-index-route, .liked-songs-route, .home-route, .search-route, .about-route) .site-header .menu-toggle,
-:root:is(.song-route, .playlist-detail-route, .album-detail-route, .playlist-index-route, .album-index-route, .liked-songs-route, .home-route, .search-route, .about-route) .site-header .theme-toggle {
+.site-header .brand,
+.site-header .nav-link,
+.site-header .menu-toggle,
+.site-header .theme-toggle {
   color: inherit;
 }
 
-:root:is(.song-route, .playlist-detail-route, .album-detail-route, .playlist-index-route, .album-index-route, .liked-songs-route, .home-route, .search-route, .about-route) .site-header .nav-link,
-:root:is(.song-route, .playlist-detail-route, .album-detail-route, .playlist-index-route, .album-index-route, .liked-songs-route, .home-route, .search-route, .about-route) .site-header .nav-button--primary {
+.site-header .nav-link,
+.site-header .nav-button--primary {
   border-color: transparent;
   background: transparent !important;
   color: inherit !important;
 }
 
-:root:is(.song-route, .playlist-detail-route, .album-detail-route, .playlist-index-route, .album-index-route, .liked-songs-route, .home-route, .search-route, .about-route) .site-header .nav-link:hover,
-:root:is(.song-route, .playlist-detail-route, .album-detail-route, .playlist-index-route, .album-index-route, .liked-songs-route, .home-route, .search-route, .about-route) .site-header .nav-link--active,
-:root:is(.song-route, .playlist-detail-route, .album-detail-route, .playlist-index-route, .album-index-route, .liked-songs-route, .home-route, .search-route, .about-route) .site-header .nav-button--primary:hover,
-:root:is(.song-route, .playlist-detail-route, .album-detail-route, .playlist-index-route, .album-index-route, .liked-songs-route, .home-route, .search-route, .about-route) .site-header .menu-toggle:hover,
-:root:is(.song-route, .playlist-detail-route, .album-detail-route, .playlist-index-route, .album-index-route, .liked-songs-route, .home-route, .search-route, .about-route) .site-header .theme-toggle:hover {
+.site-header .nav-link:hover,
+.site-header .nav-link--active,
+.site-header .nav-button--primary:hover,
+.site-header .menu-toggle:hover,
+.site-header .theme-toggle:hover {
   background: rgb(255 255 255 / 12%) !important;
 }
 
-:root[data-theme="light"]:is(.song-route, .playlist-detail-route, .album-detail-route, .playlist-index-route, .album-index-route, .liked-songs-route, .home-route, .search-route, .about-route) .site-header .nav-link:hover,
-:root[data-theme="light"]:is(.song-route, .playlist-detail-route, .album-detail-route, .playlist-index-route, .album-index-route, .liked-songs-route, .home-route, .search-route, .about-route) .site-header .nav-link--active,
-:root[data-theme="light"]:is(.song-route, .playlist-detail-route, .album-detail-route, .playlist-index-route, .album-index-route, .liked-songs-route, .home-route, .search-route, .about-route) .site-header .nav-button--primary:hover,
-:root[data-theme="light"]:is(.song-route, .playlist-detail-route, .album-detail-route, .playlist-index-route, .album-index-route, .liked-songs-route, .home-route, .search-route, .about-route) .site-header .menu-toggle:hover,
-:root[data-theme="light"]:is(.song-route, .playlist-detail-route, .album-detail-route, .playlist-index-route, .album-index-route, .liked-songs-route, .home-route, .search-route, .about-route) .site-header .theme-toggle:hover {
+:root[data-theme="light"] .site-header .nav-link:hover,
+:root[data-theme="light"] .site-header .nav-link--active,
+:root[data-theme="light"] .site-header .nav-button--primary:hover,
+:root[data-theme="light"] .site-header .menu-toggle:hover,
+:root[data-theme="light"] .site-header .theme-toggle:hover {
   background: rgb(0 0 0 / 8%) !important;
 }
 
@@ -345,13 +345,13 @@ h3 {
 .nav-link {
   display: inline-flex;
   border: 1px solid transparent;
-  color: #ffffff;
-  background: var(--accent-strong);
+  background: transparent;
+  color: inherit;
 }
 
 .nav-link:hover,
 .nav-link--active {
-  background: var(--accent);
+  background: rgb(255 255 255 / 12%);
 }
 
 .nav-button {
@@ -360,12 +360,12 @@ h3 {
 }
 
 .nav-button--primary {
-  background: var(--accent-strong) !important;
-  color: #ffffff !important;
+  background: transparent !important;
+  color: inherit !important;
 }
 
 .nav-button--primary:hover {
-  background: var(--accent) !important;
+  background: rgb(255 255 255 / 12%) !important;
 }
 
 .menu-toggle {
@@ -524,18 +524,28 @@ h3 {
 }
 
 .site-footer {
+  position: relative;
   display: flex;
   width: 100%;
   min-height: 68px;
   align-items: center;
   justify-content: space-between;
   margin: 0;
-  border-top: 1px solid var(--border-soft);
   background: var(--navy);
   color: var(--text);
   gap: 2rem;
   padding: 1rem max(3rem, calc((100vw - var(--content)) / 2));
   font-size: 0.9rem;
+}
+
+.site-footer::before {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(100% - 6rem, 1500px);
+  border-top: 1px solid var(--border-soft);
+  content: "";
+  transform: translateX(-50%);
 }
 
 .site-footer p {
@@ -1310,6 +1320,27 @@ h3 {
   color: var(--text);
 }
 
+.not-found-page .home-index-hero {
+  height: auto;
+  min-height: clamp(240px, 20vw, 300px);
+}
+
+.not-found-page .song-hero__inner {
+  min-height: inherit;
+  align-items: center;
+}
+
+.not-found-page .song-hero__title {
+  max-width: none;
+  font-size: clamp(5rem, 9vw, 9rem);
+  line-height: 0.9;
+}
+
+.not-found__body h2 {
+  margin-bottom: 1rem;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+}
+
 .home-search-action {
   width: min(100%, 420px);
   margin: 0.75rem auto 0;
@@ -1338,8 +1369,9 @@ h3 {
 }
 
 .song-overview__artists a {
-  color: inherit;
+  color: var(--text);
   text-decoration: underline;
+  text-decoration-color: var(--link);
   text-underline-offset: 3px;
 }
 
@@ -1656,6 +1688,408 @@ h3 {
   stroke: currentColor;
 }
 
+.fretboard__note-label {
+  /* Keep labels readable inside the neutral note markers in both themes. */
+  fill: var(--text);
+  font-family: inherit;
+  font-size: 7px;
+  font-weight: 700;
+  pointer-events: none;
+}
+
+.fretboard__note-label--root {
+  fill: var(--navy-raised);
+}
+
+.solo-workspace {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem 0 0;
+}
+
+.solo-card h3,
+.solo-reference-row h3 {
+  margin: 0;
+  color: var(--text);
+}
+
+.solo-card__heading > p:last-child {
+  margin: 0;
+  color: var(--muted);
+}
+
+.solo-card,
+.solo-reference-row {
+  min-width: 0;
+  border-bottom: 1px solid var(--border-subtle);
+  padding: clamp(1.25rem, 2.5vw, 2rem) 0;
+}
+
+.solo-card {
+  display: grid;
+  grid-template-columns: 210px minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(1.5rem, 4vw, 4rem);
+}
+
+.solo-card__heading {
+  min-width: 0;
+}
+
+.solo-card__heading h3,
+.solo-reference-row h3 {
+  margin-bottom: 0.55rem;
+  font-size: clamp(1.25rem, 2vw, 1.65rem);
+}
+
+.solo-card__heading strong {
+  color: var(--text);
+}
+
+.solo-card__note {
+  grid-column: 2;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.solo-reference-row {
+  display: grid;
+  grid-template-columns: 210px minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(1.5rem, 4vw, 4rem);
+}
+
+.solo-reference-row__heading .eyebrow,
+.solo-card__heading .eyebrow,
+.solo-workspace .eyebrow {
+  margin-bottom: 0.5rem;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.solo-segmented {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.solo-segmented__button,
+.progression-builder button,
+.tempo-trainer button {
+  min-height: 38px;
+  border-color: var(--border);
+  background: var(--navy);
+  color: var(--text);
+}
+
+.solo-segmented__button[aria-pressed="true"],
+.progression-builder__step[aria-pressed="true"] {
+  border-color: var(--link);
+  background: var(--navy-raised);
+  box-shadow: inset 0 -2px 0 var(--link);
+}
+
+.progression-builder {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  grid-template-areas:
+    "heading add"
+    "heading sequence"
+    "heading actions";
+}
+
+.progression-builder .solo-card__heading {
+  grid-area: heading;
+}
+
+.progression-builder .solo-card__heading h3 {
+  margin-bottom: 0.35rem;
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+}
+
+.progression-builder .solo-card__heading > p:last-child {
+  max-width: 24rem;
+  font-size: 0.85rem;
+  line-height: 1.35;
+}
+
+.progression-builder__add {
+  display: grid;
+  grid-area: add;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0.45rem;
+}
+
+.progression-builder__add button {
+  display: grid;
+  height: auto;
+  min-width: 0;
+  min-height: 48px;
+  padding: 0.3rem 0.25rem;
+}
+
+.progression-builder__add button span {
+  color: var(--link);
+  font-size: 0.78rem;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+}
+
+.progression-builder__add button strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.9rem;
+}
+
+.progression-builder__sequence {
+  display: grid;
+  min-width: 0;
+  grid-area: sequence;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.progression-builder__sequence > button {
+  min-height: 32px;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.82rem;
+}
+
+.progression-builder__steps {
+  display: flex;
+  min-width: 0;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.progression-builder__step {
+  display: inline-flex;
+  gap: 0.45rem;
+  min-height: 32px;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.82rem;
+}
+
+.progression-builder__step span {
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.progression-builder__empty {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.progression-builder__actions {
+  display: flex;
+  grid-area: actions;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.progression-builder__actions button {
+  min-height: 32px;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.chord-targets,
+.scale-overlay {
+  grid-template-areas:
+    "heading mode"
+    "heading controls"
+    "heading board"
+    "heading legend";
+}
+
+.chord-targets .solo-card__heading,
+.scale-overlay .solo-card__heading {
+  grid-area: heading;
+}
+
+.chord-targets .solo-segmented,
+.scale-overlay .solo-segmented {
+  grid-area: controls;
+}
+
+.scale-overlay__mode {
+  grid-area: mode;
+}
+
+.solo-reference-row > .solo-segmented,
+.solo-reference-row > .pentatonic-boxes {
+  grid-column: 2;
+}
+
+.solo-fretboard-frame {
+  width: 100%;
+  min-width: 0;
+  grid-area: board;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--navy-raised) 45%, transparent);
+  padding: clamp(0.5rem, 1.5vw, 1rem);
+}
+
+.solo-fretboard {
+  display: block;
+  width: 100%;
+  height: auto;
+  color: var(--text);
+}
+
+.solo-fretboard__string,
+.solo-fretboard__fret,
+.solo-fretboard__nut {
+  stroke: var(--muted);
+  stroke-width: 1.25;
+  vector-effect: non-scaling-stroke;
+}
+
+.solo-fretboard__nut {
+  stroke-width: 2.5;
+}
+
+.solo-fretboard__axis-label {
+  fill: var(--muted);
+  font-family: inherit;
+  font-size: 12px;
+}
+
+.solo-fretboard__note {
+  stroke: var(--navy);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+}
+
+.solo-fretboard__note--safe {
+  fill: var(--text);
+}
+
+.solo-fretboard__note--color {
+  fill: var(--accent);
+}
+
+.solo-fretboard__note--root {
+  stroke: var(--link);
+  stroke-width: 3;
+}
+
+.solo-fretboard__note--target {
+  fill: #f0b84b;
+  stroke: #fff4d6;
+  stroke-width: 3;
+}
+
+.solo-fretboard__note-label {
+  fill: var(--navy);
+  font-family: inherit;
+  font-size: 8px;
+  font-weight: 800;
+  pointer-events: none;
+}
+
+.solo-legend {
+  display: flex;
+  grid-area: legend;
+  flex-wrap: wrap;
+  gap: 0.65rem 1.25rem;
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.solo-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.solo-legend .is-target {
+  color: var(--text);
+}
+
+.solo-legend span > b:not(.legend-dot) {
+  display: inline-grid;
+  width: 1.35rem;
+  height: 1.35rem;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--text);
+  color: var(--navy);
+  font-size: 0.7rem;
+}
+
+.solo-legend .is-target > b {
+  background: #f0b84b;
+}
+
+.legend-dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+}
+
+.legend-dot--safe {
+  background: var(--text);
+}
+
+.legend-dot--color {
+  background: var(--accent);
+}
+
+.legend-dot--root {
+  border: 2px solid var(--link);
+  background: var(--text);
+}
+
+.tempo-trainer {
+  grid-template-areas:
+    "heading controls"
+    "heading note";
+}
+
+.tempo-trainer .solo-card__heading {
+  grid-area: heading;
+}
+
+.tempo-trainer__controls {
+  display: grid;
+  grid-area: controls;
+  grid-template-columns: auto 78px minmax(150px, 1fr) repeat(2, auto);
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tempo-trainer__controls label {
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.tempo-trainer__controls input[type="number"] {
+  height: 38px;
+  border-color: var(--border);
+  background: var(--navy-raised);
+  color: var(--text);
+}
+
+.tempo-trainer__range {
+  width: 100%;
+  accent-color: var(--accent);
+}
+
+.tempo-trainer .solo-card__note {
+  grid-area: note;
+  margin-top: 0.25rem;
+  font-size: 0.8rem;
+}
+
 :root[data-theme="light"] .fretboard {
   color: #171717;
 }
@@ -1672,7 +2106,8 @@ h3 {
   }
 
   .chord-diagram {
-    width: min(100%, 920px);
+    width: 100%;
+    justify-self: stretch;
   }
 
   .chord-diagram th,
@@ -1826,6 +2261,42 @@ h3 {
   justify-content: center;
 }
 
+.error-state {
+  width: min(100%, 760px);
+  padding: clamp(1.5rem, 4vw, 2.5rem) 0;
+  border-block: 1px solid var(--border-subtle);
+  text-align: center;
+}
+
+.error-state h1 {
+  margin-bottom: 0.75rem;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.error-state p {
+  max-width: 620px;
+  margin: 0 auto;
+  color: var(--muted);
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+}
+
+.error-state .button-row {
+  justify-content: center;
+}
+
+.error-state__action {
+  min-width: 120px;
+  border-color: var(--border);
+  background: var(--surface-dark);
+  color: var(--text);
+}
+
+.error-state__action:hover:not(:disabled) {
+  border-color: var(--link);
+  background: var(--navy-raised);
+  color: var(--text);
+}
+
 @media (max-width: 1100px) {
   .site-nav,
   .page {
@@ -1834,6 +2305,10 @@ h3 {
 
   .song-hero__inner,
   .song-page__body {
+    width: min(100% - 3rem, 1500px);
+  }
+
+  .site-footer::before {
     width: min(100% - 3rem, 1500px);
   }
 
@@ -1911,12 +2386,60 @@ h3 {
     grid-template-columns: minmax(180px, 0.55fr) minmax(0, 1.45fr);
   }
 
+  .solo-card,
+  .solo-reference-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .progression-builder {
+    grid-template-areas:
+      "heading"
+      "add"
+      "sequence"
+      "actions";
+  }
+
+  .chord-targets,
+  .scale-overlay {
+    grid-template-areas:
+      "heading"
+      "mode"
+      "controls"
+      "board"
+      "legend";
+  }
+
+  .solo-reference-row > .solo-segmented,
+  .solo-reference-row > .pentatonic-boxes {
+    grid-column: 1;
+  }
+
+  .tempo-trainer {
+    grid-template-areas:
+      "heading"
+      "controls"
+      "note";
+  }
+
+  .solo-card__note {
+    grid-column: 1;
+  }
+
+  .tempo-trainer__controls {
+    grid-template-columns: auto 80px minmax(120px, 1fr) repeat(2, auto);
+  }
+
 }
 
 @media (max-width: 680px) {
   .site-nav,
   .page {
     width: min(100% - 2rem, var(--content));
+  }
+
+  .site-footer::before {
+    width: min(100% - 2rem, 1500px);
   }
 
   .site-nav {
@@ -2019,6 +2542,72 @@ h3 {
 
   .song-facts {
     gap: 1rem;
+  }
+
+  .solo-card,
+  .solo-reference-row {
+    padding: 0.9rem 0;
+  }
+
+  .progression-builder__add {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .progression-builder__sequence {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .progression-builder__steps {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  .progression-builder__sequence > button {
+    width: 100%;
+  }
+
+  .tempo-trainer__controls {
+    grid-template-areas:
+      "label song-tempo toggle bpm"
+      "range range range range";
+    grid-template-columns: auto minmax(0, 1fr) auto 70px;
+  }
+
+  .tempo-trainer__controls label {
+    grid-area: label;
+  }
+
+  .tempo-trainer__bpm {
+    grid-area: bpm;
+  }
+
+  .tempo-trainer__song-tempo {
+    grid-area: song-tempo;
+  }
+
+  .tempo-trainer__toggle {
+    grid-area: toggle;
+  }
+
+  .tempo-trainer__controls button {
+    width: 100%;
+  }
+
+  .tempo-trainer__range {
+    grid-area: range;
+  }
+
+  .solo-fretboard-frame {
+    padding: 0.35rem;
+  }
+
+  .solo-fretboard__string,
+  .solo-fretboard__fret {
+    stroke-width: 0.75;
+  }
+
+  .solo-fretboard__note {
+    stroke-width: 0.8;
   }
 
   .playlist-summary {

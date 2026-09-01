@@ -2,6 +2,7 @@ import {
   getDiatonicChords,
   getFretboardNotes,
   getPentatonicBoxes,
+  getScaleNotes,
 } from "../../utils/music";
 
 const STRING_LABELS = ["E", "B", "G", "D", "A", "E"];
@@ -9,8 +10,17 @@ const FRET_WIDTH = 42;
 const STRING_GAP = 24;
 const GRID_LEFT = 30;
 const GRID_TOP = 18;
+const STRING_PITCHES = [4, 11, 7, 2, 9, 4];
 
-function FretboardSvg({ endFret, label, notes, startFret, showInlays = false }) {
+function addScaleLabels(audioFeature, notes) {
+  const noteByPitchClass = new Map(getScaleNotes(audioFeature).map((note) => [note.pitchClass, note]));
+  return notes.map((note) => {
+    const pitchClass = (STRING_PITCHES[note.stringIndex] + note.fret) % 12;
+    return { ...note, ...noteByPitchClass.get(pitchClass) };
+  });
+}
+
+function FretboardSvg({ endFret, label, labelMode = "dots", notes, startFret, showInlays = false }) {
   const fretCount = endFret - startFret + 1;
   const gridWidth = fretCount * FRET_WIDTH;
   const gridHeight = STRING_GAP * (STRING_LABELS.length - 1);
@@ -83,14 +93,28 @@ function FretboardSvg({ endFret, label, notes, startFret, showInlays = false }) 
       {notes.map((note) => {
         const x = GRID_LEFT + (note.fret - startFret + 0.5) * FRET_WIDTH;
         const y = GRID_TOP + note.stringIndex * STRING_GAP;
+        const noteLabel = labelMode === "notes" ? note.name : note.degree;
         return (
-          <circle
-            className={note.root ? "fretboard__note fretboard__note--root" : "fretboard__note"}
-            key={`note-${note.stringIndex}-${note.fret}`}
-            cx={x}
-            cy={y}
-            r="8"
-          />
+          <g key={`note-${note.stringIndex}-${note.fret}`}>
+            <circle
+              className={note.root ? "fretboard__note fretboard__note--root" : "fretboard__note"}
+              cx={x}
+              cy={y}
+              r="8"
+            />
+            {labelMode !== "dots" ? (
+              <text
+                className={note.root
+                  ? "fretboard__note-label fretboard__note-label--root"
+                  : "fretboard__note-label"}
+                x={x}
+                y={y + 3}
+                textAnchor="middle"
+              >
+                {noteLabel}
+              </text>
+            ) : null}
+          </g>
         );
       })}
 
@@ -138,7 +162,7 @@ export function ChordsInKey({ audioFeature }) {
   );
 }
 
-export function PentatonicShapes({ audioFeature }) {
+export function PentatonicShapes({ audioFeature, labelMode = "dots" }) {
   const boxes = getPentatonicBoxes(audioFeature);
 
   return (
@@ -149,7 +173,8 @@ export function PentatonicShapes({ audioFeature }) {
           <FretboardSvg
             startFret={box.startFret}
             endFret={box.endFret}
-            notes={box.notes}
+            labelMode={labelMode}
+            notes={addScaleLabels(audioFeature, box.notes)}
             label={`Pentatonic position ${box.position}, frets ${box.startFret} through ${box.endFret}`}
           />
         </figure>
@@ -158,13 +183,14 @@ export function PentatonicShapes({ audioFeature }) {
   );
 }
 
-export function PentatonicFretboard({ audioFeature }) {
+export function PentatonicFretboard({ audioFeature, labelMode = "dots" }) {
   return (
     <div className="full-fretboard">
       <FretboardSvg
         startFret={1}
         endFret={17}
-        notes={getFretboardNotes(audioFeature, 1, 17)}
+        labelMode={labelMode}
+        notes={addScaleLabels(audioFeature, getFretboardNotes(audioFeature, 1, 17))}
         label="Pentatonic notes across frets 1 through 17"
         showInlays
       />

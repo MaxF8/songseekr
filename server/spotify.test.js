@@ -60,7 +60,18 @@ test("playlist normalization tolerates unavailable collection entries", () => {
 
 test("track and feature normalization use safe fallbacks", () => {
   assert.deepEqual(normalizeFeature({ key: -1, mode: 1 }), null);
-  assert.deepEqual(normalizeFeature({ key: 9, mode: 0 }), { key: 9, mode: 0 });
+  assert.deepEqual(normalizeFeature({ key: 9, mode: 0 }), {
+    key: 9,
+    mode: 0,
+    tempo: null,
+    timeSignature: null,
+  });
+  assert.deepEqual(normalizeFeature({ key: 4, mode: 1, tempo: 124.5, time_signature: 4 }), {
+    key: 4,
+    mode: 1,
+    tempo: 124.5,
+    timeSignature: 4,
+  });
   assert.equal(normalizeTrack({}).name, "Unavailable track");
   assert.deepEqual(normalizeTrack(null).artists, []);
   assert.deepEqual(normalizeTrack({ artists: {}, album: { images: null } }).artists, []);

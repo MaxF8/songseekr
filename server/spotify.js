@@ -244,6 +244,8 @@ function normalizeFeature(feature) {
   return {
     key: feature.key,
     mode: feature.mode,
+    tempo: Number.isFinite(feature.tempo) ? feature.tempo : null,
+    timeSignature: Number.isInteger(feature.time_signature) ? feature.time_signature : null,
   };
 }
 

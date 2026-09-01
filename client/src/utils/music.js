@@ -60,6 +60,10 @@ const MINOR_SCALES = [
 
 const MAJOR_PENTATONIC_INTERVALS = [0, 2, 4, 7, 9];
 const MINOR_PENTATONIC_INTERVALS = [0, 3, 5, 7, 10];
+const MAJOR_SCALE_INTERVALS = [0, 2, 4, 5, 7, 9, 11];
+const MINOR_SCALE_INTERVALS = [0, 2, 3, 5, 7, 8, 10];
+const MAJOR_SCALE_DEGREES = ["1", "2", "3", "4", "5", "6", "7"];
+const MINOR_SCALE_DEGREES = ["1", "2", "♭3", "4", "5", "♭6", "♭7"];
 const GUITAR_STRING_PITCHES = [4, 11, 7, 2, 9, 4];
 
 function positiveModulo(value, divisor) {
@@ -114,6 +118,61 @@ export function getPentatonicPitchClasses(audioFeature) {
     ? MAJOR_PENTATONIC_INTERVALS
     : MINOR_PENTATONIC_INTERVALS;
   return intervals.map((interval) => positiveModulo(audioFeature.key + interval, 12));
+}
+
+export function getScaleNotes(audioFeature) {
+  if (!audioFeature || !Number.isInteger(audioFeature.key) || !KEYS[audioFeature.key]) return [];
+
+  const major = audioFeature.mode === 1;
+  const intervals = major ? MAJOR_SCALE_INTERVALS : MINOR_SCALE_INTERVALS;
+  const degrees = major ? MAJOR_SCALE_DEGREES : MINOR_SCALE_DEGREES;
+  const names = major ? MAJOR_SCALES[audioFeature.key] : MINOR_SCALES[audioFeature.key];
+  const pentatonicPitchClasses = new Set(getPentatonicPitchClasses(audioFeature));
+
+  return intervals.map((interval, index) => {
+    const pitchClass = positiveModulo(audioFeature.key + interval, 12);
+    return {
+      degree: degrees[index],
+      name: names[index],
+      pentatonic: pentatonicPitchClasses.has(pitchClass),
+      pitchClass,
+      root: index === 0,
+    };
+  });
+}
+
+export function getDiatonicHarmony(audioFeature) {
+  const chords = getDiatonicChords(audioFeature);
+  const scaleNotes = getScaleNotes(audioFeature);
+  if (chords.length === 0 || scaleNotes.length === 0) return [];
+
+  return chords.map((chord, chordIndex) => ({
+    ...chord,
+    scaleIndex: chordIndex,
+    tones: [0, 2, 4, 6].map((offset, toneIndex) => {
+      const note = scaleNotes[(chordIndex + offset) % scaleNotes.length];
+      return {
+        ...note,
+        role: ["Root", "Third", "Fifth", "Seventh"][toneIndex],
+        shortRole: ["R", "3", "5", "7"][toneIndex],
+      };
+    }),
+  }));
+}
+
+export function getScaleFretboardNotes(audioFeature, startFret = 1, endFret = 17) {
+  const scaleNotes = getScaleNotes(audioFeature);
+  if (scaleNotes.length === 0 || endFret < startFret) return [];
+  const noteByPitchClass = new Map(scaleNotes.map((note) => [note.pitchClass, note]));
+
+  return GUITAR_STRING_PITCHES.flatMap((openPitch, stringIndex) =>
+    Array.from({ length: endFret - startFret + 1 }, (_, offset) => {
+      const fret = startFret + offset;
+      const pitchClass = positiveModulo(openPitch + fret, 12);
+      const scaleNote = noteByPitchClass.get(pitchClass);
+      return scaleNote ? { ...scaleNote, fret, stringIndex } : null;
+    }).filter(Boolean)
+  );
 }
 
 export function getFretboardNotes(audioFeature, startFret = 1, endFret = 17) {

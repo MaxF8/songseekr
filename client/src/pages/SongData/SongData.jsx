@@ -1,11 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 
+import SoloWorkspace from "../../components/SoloWorkspace/SoloWorkspace";
 import SpotifyAttribution from "../../components/SpotifyAttribution/SpotifyAttribution";
-import {
-  ChordsInKey,
-  PentatonicFretboard,
-  PentatonicShapes,
-} from "../../components/PracticeDiagrams/PracticeDiagrams";
 import AsyncState from "../../components/ui/AsyncState";
 import useApiResource from "../../hooks/useApiResource";
 import useArtworkTheme from "../../hooks/useArtworkTheme";
@@ -26,42 +22,6 @@ function ArtistLinks({ artists = [] }) {
       )}
     </span>
   ));
-}
-
-function ScaleReferences({ audioFeature }) {
-  if (getPentatonicPitchClasses(audioFeature).length === 0) {
-    return (
-      <section className="status-alert" aria-labelledby="scale-heading">
-        <h2 id="scale-heading">Practice references unavailable</h2>
-        <p>
-          Spotify did not return a reliable key for this track, so songseekr will not guess which
-          scale to show.
-        </p>
-      </section>
-    );
-  }
-
-  return (
-    <section
-      className="practice-references"
-      aria-label={`Practice references for ${describeKey(audioFeature)}`}
-    >
-      <div className="reference-list">
-        <section className="reference-item reference-item--strip" aria-labelledby="chords-heading">
-          <h3 id="chords-heading">Chords in key</h3>
-          <ChordsInKey audioFeature={audioFeature} />
-        </section>
-        <section className="reference-item reference-item--compact" aria-labelledby="shapes-heading">
-          <h3 id="shapes-heading">Pentatonic shapes</h3>
-          <PentatonicShapes audioFeature={audioFeature} />
-        </section>
-        <section className="reference-item reference-item--wide" aria-labelledby="fretboard-heading">
-          <h3 id="fretboard-heading">Pentatonic fretboard</h3>
-          <PentatonicFretboard audioFeature={audioFeature} />
-        </section>
-      </div>
-    </section>
-  );
 }
 
 export default function SongData() {
@@ -120,10 +80,9 @@ export default function SongData() {
           </header>
 
           <div className="song-page__body">
-            <section className="song-overview" aria-labelledby="track-details-heading">
+            <section className="song-overview" aria-label="Track details">
               <div>
                 <p className="song-overview__eyebrow">Track details</p>
-                <h2 id="track-details-heading">Learn the song</h2>
                 <p className="song-overview__artists">
                   <span>{track.artists.length === 1 ? "Artist: " : "Artists: "}</span>
                   <ArtistLinks artists={track.artists} />
@@ -161,14 +120,14 @@ export default function SongData() {
 
             </section>
 
-            <div className="song-references">
-              {!data.audioFeaturesAvailable && (
-                <p className="notice">
-                  Key data is unavailable from Spotify right now. Track details remain available.
-                </p>
-              )}
-              <ScaleReferences audioFeature={track.audioFeature} />
-            </div>
+            {getPentatonicPitchClasses(track.audioFeature).length > 0 ? (
+              <SoloWorkspace audioFeature={track.audioFeature} />
+            ) : (
+              <section className="status-alert" aria-labelledby="solo-unavailable-heading">
+                <h2 id="solo-unavailable-heading">Solo workspace unavailable</h2>
+                <p>Spotify did not return a reliable key, so songseekr will not guess.</p>
+              </section>
+            )}
 
             <SpotifyAttribution className="spotify-attribution--song" />
           </div>

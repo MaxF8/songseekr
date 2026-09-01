@@ -48,6 +48,15 @@ function ProtectedRoute() {
 }
 
 function AppLayout() {
+  const location = useLocation();
+
+  if (
+    import.meta.env.DEV
+    && new URLSearchParams(location.search).get("errorBoundary") === "1"
+  ) {
+    throw new Error("Development ErrorBoundary preview");
+  }
+
   return (
     <div className="app-shell">
       <ScrollToTop />

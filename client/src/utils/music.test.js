@@ -3,9 +3,12 @@ import {
   describeKey,
   formatDuration,
   getDiatonicChords,
+  getDiatonicHarmony,
   getFretboardNotes,
   getPentatonicBoxes,
   getPentatonicPitchClasses,
+  getScaleFretboardNotes,
+  getScaleNotes,
   scaleCoordinates,
 } from "./music";
 
@@ -61,7 +64,30 @@ describe("music utilities", () => {
         expect(getPentatonicBoxes(audioFeature)).toHaveLength(5);
         expect(getPentatonicBoxes(audioFeature).every((box) => box.notes.length > 0)).toBe(true);
         expect(getFretboardNotes(audioFeature, 1, 17).length).toBeGreaterThan(0);
+        expect(getScaleNotes(audioFeature)).toHaveLength(7);
+        expect(getScaleFretboardNotes(audioFeature, 1, 17).length).toBeGreaterThan(0);
+        expect(getDiatonicHarmony(audioFeature)).toHaveLength(7);
       }
     }
+  });
+
+  it("builds chord tones and transferable scale labels for solo practice", () => {
+    const aMinor = { key: 9, mode: 0 };
+
+    expect(getScaleNotes(aMinor).map(({ degree, name }) => ({ degree, name }))).toEqual([
+      { degree: "1", name: "A" },
+      { degree: "2", name: "B" },
+      { degree: "♭3", name: "C" },
+      { degree: "4", name: "D" },
+      { degree: "5", name: "E" },
+      { degree: "♭6", name: "F" },
+      { degree: "♭7", name: "G" },
+    ]);
+    expect(getDiatonicHarmony(aMinor)[0].tones.map(({ name, role }) => [name, role])).toEqual([
+      ["A", "Root"],
+      ["C", "Third"],
+      ["E", "Fifth"],
+      ["G", "Seventh"],
+    ]);
   });
 });

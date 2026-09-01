@@ -1,5 +1,6 @@
 import { cva } from "class-variance-authority";
 import { Slot } from "radix-ui"
+import { forwardRef } from "react";
 
 import { cn } from "@/lib/utils"
 
@@ -40,17 +41,18 @@ const buttonVariants = cva(
   }
 )
 
-function Button({
+const Button = forwardRef(function Button({
   className,
   variant = "default",
   size = "default",
   asChild = false,
   ...props
-}) {
+}, ref) {
   const Comp = asChild ? Slot.Root : "button"
 
   return (
     <Comp
+      ref={ref}
       data-slot="button"
       data-variant={variant}
       data-size={size}
@@ -58,6 +60,6 @@ function Button({
       {...props}
     />
   )
-}
+})
 
 export { Button, buttonVariants }
