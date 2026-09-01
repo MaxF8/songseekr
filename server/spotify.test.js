@@ -4,6 +4,7 @@ const test = require("node:test");
 const {
   assertSpotifyId,
   normalizeFeature,
+  normalizePlaylist,
   normalizePlaylistEntry,
   normalizeTrack,
   SpotifyError,
@@ -28,6 +29,17 @@ test("playlist normalization supports the current item field and filters episode
   assert.equal(track.id, "track123");
   assert.equal(track.durationMs, 61000);
   assert.equal(normalizePlaylistEntry({ item: { type: "episode" } }), null);
+});
+
+test("playlist normalization tolerates unavailable collection entries", () => {
+  assert.deepEqual(normalizePlaylist(null), {
+    id: null,
+    name: "Untitled playlist",
+    image: null,
+    spotifyUrl: null,
+    owner: null,
+    total: null,
+  });
 });
 
 test("track and feature normalization use safe fallbacks", () => {

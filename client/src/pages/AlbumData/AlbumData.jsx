@@ -1,10 +1,13 @@
+import { ExternalLinkIcon } from "lucide-react";
 import { useParams } from "react-router-dom";
 
 import SpotifyAttribution from "../../components/SpotifyAttribution/SpotifyAttribution";
 import AsyncState from "../../components/ui/AsyncState";
 import Pagination from "../../components/ui/Pagination";
 import TrackTable from "../../components/ui/TrackTable";
+import { Button } from "../../components/ui/button";
 import useApiResource from "../../hooks/useApiResource";
+import useArtworkTheme from "../../hooks/useArtworkTheme";
 import usePage from "../../hooks/usePage";
 import { artistNames } from "../../utils/music";
 
@@ -16,58 +19,97 @@ export default function AlbumData() {
   const { data, error, loading, retry } = useApiResource(
     `/api/albums/${encodeURIComponent(albumId)}?limit=${LIMIT}&offset=${offset}`
   );
+  const album = data?.album;
+  const titleLength = album?.name.length || 0;
+  const titleClassName = [
+    "song-hero__title",
+    titleLength > 34 ? "song-hero__title--long" : "",
+    titleLength > 58 ? "song-hero__title--very-long" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  useArtworkTheme(album?.image, "album-detail-route");
 
   return (
-    <main className="page">
+    <main className="song-page album-detail-page">
       <AsyncState loading={loading} loadingMessage="Loading album…" error={error} onRetry={retry} />
 
-      {data && (
+      {data && album && (
         <>
-          <header className="detail-header">
-            {data.album.image ? (
-              <img src={data.album.image} alt="" width="320" height="320" />
-            ) : (
-              <div className="detail-placeholder" aria-hidden="true">♪</div>
-            )}
-            <div>
-              <h1>{data.album.name}</h1>
-              <p>{artistNames(data.album.artists)}</p>
-              {data.album.releaseDate && <p>Released {data.album.releaseDate}</p>}
-              {data.album.spotifyUrl && (
-                <a
-                  className="text-link"
-                  href={data.album.spotifyUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Open album in Spotify
-                </a>
-              )}
+          <header className="song-hero album-hero">
+            <div className="song-hero__inner">
+              <div className="song-hero__copy">
+                <h1 className={titleClassName}>{album.name}</h1>
+              </div>
+
+              <div className="song-hero__art">
+                {album.image ? (
+                  <img
+                    src={album.image}
+                    alt={`${album.name} cover`}
+                    width="440"
+                    height="440"
+                  />
+                ) : (
+                  <div className="song-hero__placeholder" aria-hidden="true">
+                    ♪
+                  </div>
+                )}
+              </div>
             </div>
           </header>
 
-          {!data.audioFeaturesAvailable && (
-            <p className="notice">Spotify did not provide key data for these tracks.</p>
-          )}
+          <div className="song-page__body album-detail__body">
+            <section className="playlist-summary album-summary" aria-label="Album details">
+              <dl>
+                <div>
+                  <dt>Artist</dt>
+                  <dd>{artistNames(album.artists)}</dd>
+                </div>
+                <div>
+                  <dt>Released</dt>
+                  <dd>{album.releaseDate || "Unknown"}</dd>
+                </div>
+                <div>
+                  <dt>Tracks</dt>
+                  <dd>{data.total}</dd>
+                </div>
+              </dl>
 
-          <section aria-labelledby="album-tracks">
-            <div className="section-heading section-heading--row">
-              <h2 id="album-tracks">Tracks</h2>
-              <span>{data.total} total</span>
-            </div>
-            <AsyncState
-              empty={data.items.length === 0}
-              emptyMessage="No available tracks were found on this album page."
-            />
-            {data.items.length > 0 && <TrackTable tracks={data.items} />}
-            <Pagination
-              limit={LIMIT}
-              offset={offset}
-              total={data.total}
-              onPageChange={setPage}
-            />
-          </section>
-          <SpotifyAttribution className="spotify-attribution--page" />
+              {album.spotifyUrl ? (
+                <Button asChild variant="outline" className="playlist-spotify-link">
+                  <a href={album.spotifyUrl} target="_blank" rel="noreferrer">
+                    Open in Spotify
+                    <ExternalLinkIcon aria-hidden="true" />
+                  </a>
+                </Button>
+              ) : null}
+            </section>
+
+            {!data.audioFeaturesAvailable && (
+              <p className="notice">Spotify did not provide key data for these tracks.</p>
+            )}
+
+            <section className="playlist-tracks" aria-labelledby="album-tracks-heading">
+              <div className="section-heading section-heading--row">
+                <h2 id="album-tracks-heading">Tracks</h2>
+                <span>{data.total} total</span>
+              </div>
+              <AsyncState
+                empty={data.items.length === 0}
+                emptyMessage="No available tracks were found on this album page."
+              />
+              {data.items.length > 0 ? <TrackTable tracks={data.items} /> : null}
+              <Pagination
+                limit={LIMIT}
+                offset={offset}
+                total={data.total}
+                onPageChange={setPage}
+              />
+            </section>
+            <SpotifyAttribution className="spotify-attribution--page" />
+          </div>
         </>
       )}
     </main>

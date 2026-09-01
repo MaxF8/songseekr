@@ -4,6 +4,7 @@ import SpotifyAttribution from "../../components/SpotifyAttribution/SpotifyAttri
 import AsyncState from "../../components/ui/AsyncState";
 import MediaGrid from "../../components/ui/MediaGrid";
 import Pagination from "../../components/ui/Pagination";
+import useArtworkTheme from "../../hooks/useArtworkTheme";
 
 const LIMIT = 24;
 
@@ -13,34 +14,49 @@ export default function PlaylistPage() {
     `/api/me/playlists?limit=${LIMIT}&offset=${offset}`
   );
 
+  useArtworkTheme(undefined, "playlist-index-route");
+
   return (
-    <main className="page">
-      <header className="page-header">
-        <h1>Playlists</h1>
-        <p>Browse private and public playlists available to your connected account.</p>
+    <main className="song-page playlist-index-page">
+      <header className="song-hero playlist-index-hero">
+        <div className="song-hero__inner playlist-index-hero__inner">
+          <div className="song-hero__copy">
+            <h1 className="song-hero__title">Playlists</h1>
+          </div>
+        </div>
       </header>
 
-      <AsyncState
-        loading={loading}
-        loadingMessage="Loading playlists…"
-        error={error}
-        onRetry={retry}
-        empty={data?.items.length === 0}
-        emptyMessage="No Spotify playlists were found."
-      />
+      <div className="song-page__body playlist-index__body">
+        <AsyncState
+          loading={loading}
+          loadingMessage="Loading playlists…"
+          error={error}
+          onRetry={retry}
+          empty={data?.items.length === 0}
+          emptyMessage="No Spotify playlists were found."
+        />
 
-      {data?.items.length > 0 && (
-        <>
-          <MediaGrid items={data.items} kind="playlist" />
-          <Pagination
-            limit={LIMIT}
-            offset={offset}
-            total={data.total}
-            onPageChange={setPage}
-          />
-          <SpotifyAttribution className="spotify-attribution--page" />
-        </>
-      )}
+        {data?.items.length > 0 ? (
+          <>
+            <Pagination
+              className="pagination--top"
+              limit={LIMIT}
+              offset={offset}
+              total={data.total}
+              onPageChange={setPage}
+            />
+            <MediaGrid items={data.items} kind="playlist" />
+            <Pagination
+              className="pagination--bottom"
+              limit={LIMIT}
+              offset={offset}
+              total={data.total}
+              onPageChange={setPage}
+            />
+            <SpotifyAttribution className="spotify-attribution--page" />
+          </>
+        ) : null}
+      </div>
     </main>
   );
 }

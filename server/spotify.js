@@ -210,6 +210,10 @@ function normalizeAlbum(album = {}) {
 }
 
 function normalizePlaylist(playlist = {}) {
+  // Spotify can leave null entries in a user's playlist collection when a
+  // playlist is no longer available. Keep those entries filterable instead
+  // of failing the entire paginated response.
+  playlist = playlist || {};
   return {
     id: playlist.id || null,
     name: playlist.name || "Untitled playlist",

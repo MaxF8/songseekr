@@ -1,13 +1,13 @@
 import { Button } from "./button";
 
-export default function Pagination({ limit, offset, onPageChange, total }) {
+export default function Pagination({ className = "", limit, offset, onPageChange, total }) {
   if (!total || total <= limit) return null;
 
   const currentPage = Math.floor(offset / limit) + 1;
   const pageCount = Math.ceil(total / limit);
 
   return (
-    <nav className="pagination" aria-label="Results pages">
+    <nav className={`pagination ${className}`.trim()} aria-label="Results pages">
       <Button
         className="button button--secondary"
         type="button"

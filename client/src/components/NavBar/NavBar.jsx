@@ -92,40 +92,42 @@ export default function NavBar() {
           </SheetTrigger>
           <SheetContent side="right" showCloseButton={false} className="mobile-sheet">
             <SheetHeader className="mobile-sheet__header">
-              <SheetTitle className="sr-only">Menu</SheetTitle>
+              <SheetTitle className="mobile-sheet__eyebrow">Navigation</SheetTitle>
               <SheetDescription className="sr-only">
                 Navigate around songseekr.
               </SheetDescription>
-              <SheetClose asChild>
-                <Button className="mobile-sheet__close" variant="ghost" size="icon" aria-label="Close menu">
-                  <XIcon aria-hidden="true" />
-                </Button>
-              </SheetClose>
-            </SheetHeader>
-            <div className="mobile-sheet__links">
-              {items.map(([to, label]) => (
-                <SheetClose asChild key={to}>
-                  <NavLink className={activeClass} to={to}>
-                    {label}
-                  </NavLink>
-                </SheetClose>
-              ))}
-            </div>
-            <div className="mobile-sheet__footer">
-              <ThemeToggle className="theme-toggle--mobile" />
-              {authenticated ? (
-                <Button className="nav-button nav-button--primary" type="button" onClick={handleLogout}>
-                  Log Out
-                </Button>
-              ) : (
+              <div className="mobile-sheet__header-actions">
+                <ThemeToggle className="theme-toggle--mobile" />
                 <SheetClose asChild>
-                  <Button asChild className="nav-button nav-button--primary">
-                    <a href={`/api/auth/start?returnTo=${encodeURIComponent(location.pathname)}`}>
-                      Connect
-                    </a>
+                  <Button className="mobile-sheet__close" variant="ghost" size="icon" aria-label="Close menu">
+                    <XIcon aria-hidden="true" />
                   </Button>
                 </SheetClose>
-              )}
+              </div>
+            </SheetHeader>
+            <div className="mobile-sheet__body">
+              <div className="mobile-sheet__links">
+                {items.map(([to, label]) => (
+                  <NavItem key={to} to={to} closeMenu={closeMenu}>
+                    {label}
+                  </NavItem>
+                ))}
+              </div>
+              <div className="mobile-sheet__footer">
+                {authenticated ? (
+                  <Button className="nav-button nav-button--primary" type="button" onClick={handleLogout}>
+                    Log Out
+                  </Button>
+                ) : (
+                  <SheetClose asChild>
+                    <Button asChild className="nav-button nav-button--primary">
+                      <a href={`/api/auth/start?returnTo=${encodeURIComponent(location.pathname)}`}>
+                        Connect
+                      </a>
+                    </Button>
+                  </SheetClose>
+                )}
+              </div>
             </div>
           </SheetContent>
         </Sheet>
