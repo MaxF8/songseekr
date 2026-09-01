@@ -25,6 +25,16 @@ export function paginationPages(currentPage, pageCount) {
   ];
 }
 
+export function mobilePaginationPages(currentPage, pageCount) {
+  if (pageCount <= 3) {
+    return Array.from({ length: pageCount }, (_, index) => index + 1);
+  }
+
+  if (currentPage <= 1) return [1, 2, 3];
+  if (currentPage >= pageCount) return [pageCount - 2, pageCount - 1, pageCount];
+  return [currentPage - 1, currentPage, currentPage + 1];
+}
+
 export default function Pagination({ className = "", limit, offset, onPageChange, total }) {
   const safeLimit = Number.isFinite(limit) && limit > 0 ? Math.floor(limit) : 0;
   const safeOffset = Number.isFinite(offset) && offset >= 0 ? Math.floor(offset) : 0;
@@ -36,6 +46,7 @@ export default function Pagination({ className = "", limit, offset, onPageChange
   const currentPage = Math.min(requestedPage, pageCount);
   const previousPage = requestedPage > pageCount ? pageCount : requestedPage - 1;
   const pages = paginationPages(currentPage, pageCount);
+  const mobilePages = new Set(mobilePaginationPages(currentPage, pageCount));
 
   return (
     <nav className={`pagination ${className}`.trim()} aria-label="Results pages">
@@ -55,7 +66,10 @@ export default function Pagination({ className = "", limit, offset, onPageChange
               type="button"
               variant={page === currentPage ? "default" : "outline"}
               size="icon"
-              className="pagination__page"
+              className={[
+                "pagination__page",
+                mobilePages.has(page) ? "" : "pagination__page--mobile-hidden",
+              ].filter(Boolean).join(" ")}
               aria-label={
                 page === currentPage ? `Page ${page}, current page` : `Go to page ${page}`
               }

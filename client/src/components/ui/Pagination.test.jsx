@@ -1,7 +1,13 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { vi } from "vitest";
 
-import Pagination from "./Pagination";
+import Pagination, { mobilePaginationPages } from "./Pagination";
+
+it("limits the mobile page window to three useful pages", () => {
+  expect(mobilePaginationPages(1, 5)).toEqual([1, 2, 3]);
+  expect(mobilePaginationPages(4, 10)).toEqual([3, 4, 5]);
+  expect(mobilePaginationPages(10, 10)).toEqual([8, 9, 10]);
+});
 
 it("navigates the final valid page", () => {
   const onPageChange = vi.fn();

@@ -307,7 +307,7 @@ h3 {
 .brand-lens {
   position: absolute;
   top: -0.35rem;
-  right: 0;
+  right: 0.15rem;
   width: 1.1rem;
   height: 1.1rem;
   overflow: visible;
@@ -1080,7 +1080,7 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 0.6rem;
   margin-top: 2rem;
   color: var(--muted);
@@ -1352,9 +1352,23 @@ h3 {
   padding: clamp(9rem, 12vw, 11rem) 0 1rem;
 }
 
+.song-detail__body,
 .album-detail__body,
 .playlist-detail__body {
-  padding-top: clamp(4.75rem, 7vw, 6rem);
+  padding-top: clamp(3rem, 4vw, 4rem);
+}
+
+.song-detail-page .song-hero__art,
+.album-detail-page .song-hero__art,
+.playlist-detail-page .song-hero__art {
+  width: min(100%, 320px);
+}
+
+.song-detail-page .song-hero__copy,
+.album-detail-page .song-hero__copy,
+.playlist-detail-page .song-hero__copy {
+  align-self: end;
+  padding-bottom: 1rem;
 }
 
 .song-page__body > .spotify-attribution {
@@ -2373,6 +2387,19 @@ h3 {
     transform: translateY(3.75rem);
   }
 
+  .song-detail-page .song-hero__art,
+  .album-detail-page .song-hero__art,
+  .playlist-detail-page .song-hero__art {
+    width: min(100%, 280px);
+    transform: translateY(2rem);
+  }
+
+  .song-detail__body,
+  .album-detail__body,
+  .playlist-detail__body {
+    padding-top: 2.5rem;
+  }
+
   .song-page__body {
     padding-top: 4.5rem;
   }
@@ -2511,10 +2538,29 @@ h3 {
   }
 
   .song-hero__art {
-    order: -1;
     width: min(72vw, 310px);
     justify-self: start;
     transform: none;
+  }
+
+  .song-detail-page .song-hero__inner,
+  .album-detail-page .song-hero__inner,
+  .playlist-detail-page .song-hero__inner {
+    gap: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .song-detail-page .song-hero__art,
+  .album-detail-page .song-hero__art,
+  .playlist-detail-page .song-hero__art {
+    width: min(100%, 240px);
+  }
+
+  .song-detail-page .song-hero__copy,
+  .album-detail-page .song-hero__copy,
+  .playlist-detail-page .song-hero__copy {
+    padding-bottom: 0;
   }
 
   .song-hero__copy {
@@ -2532,6 +2578,12 @@ h3 {
   .song-page__body {
     width: min(100% - 2rem, 1500px);
     padding-top: 3.5rem;
+  }
+
+  .song-detail__body,
+  .album-detail__body,
+  .playlist-detail__body {
+    padding-top: 4.25rem;
   }
 
   .song-overview {
@@ -2815,12 +2867,21 @@ h3 {
   }
 
   .pagination {
-    gap: 0.45rem;
+    width: 100%;
+    gap: 0.35rem;
+    overflow: hidden;
   }
 
   .pagination .button {
     min-height: 44px;
-    padding: 0.7rem 0.85rem;
+    flex: 0 0 auto;
+    padding: 0.65rem 0.7rem;
+    white-space: nowrap;
+  }
+
+  .pagination__pages {
+    flex: 0 0 auto;
+    gap: 0.25rem;
   }
 
   .pagination .pagination__page {
@@ -2831,8 +2892,11 @@ h3 {
   }
 
   .pagination__ellipsis {
-    width: 16px;
-    height: 36px;
+    display: none;
+  }
+
+  .pagination__page--mobile-hidden {
+    display: none !important;
   }
 
   .collection-filter {

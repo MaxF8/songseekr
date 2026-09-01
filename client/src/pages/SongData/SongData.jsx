@@ -43,7 +43,7 @@ export default function SongData() {
   useArtworkTheme(track?.image, "song-route");
 
   return (
-    <main className="song-page">
+    <main className="song-page song-detail-page">
       <AsyncState loading={loading} loadingMessage="Loading track…" error={error} onRetry={retry} />
 
       {track && (
@@ -79,7 +79,7 @@ export default function SongData() {
             </div>
           </header>
 
-          <div className="song-page__body">
+          <div className="song-page__body song-detail__body">
             <section className="song-overview" aria-label="Track details">
               <div>
                 <p className="song-overview__eyebrow">Track details</p>

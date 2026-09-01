@@ -16,8 +16,8 @@ import {
 const MAX_PROGRESSION_CHORDS = 10;
 const LABEL_MODES = [
   { label: "Notes", value: "notes" },
-  { label: "Dots", value: "dots" },
   { label: "Degrees", value: "degrees" },
+  { label: "Dots", value: "dots" },
 ];
 
 function SegmentedControl({ label, onChange, options, value }) {
