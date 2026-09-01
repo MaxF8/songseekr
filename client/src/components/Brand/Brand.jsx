@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
-import logoMark from "../../assets/Spot-N-FindBlack.svg";
 
 export default function Brand({ onClick }) {
   return (
     <Link className="brand" to="/" onClick={onClick} aria-label="songseekr home">
-      <span className="brand-mark" aria-hidden="true">
-        <img src={logoMark} alt="" />
-      </span>
-      <span>songseekr</span>
+      <span className="brand-wordmark">songseekr</span>
+      <svg className="brand-lens" viewBox="0 0 28 28" aria-hidden="true">
+        <circle cx="11.5" cy="11.5" r="7.5" />
+        <path d="m17 17 7 7" />
+      </svg>
     </Link>
   );
 }

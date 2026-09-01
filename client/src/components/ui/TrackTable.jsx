@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { artistNames, describeKey, formatDuration } from "../../utils/music";
 import {
@@ -11,6 +11,12 @@ import {
 } from "./table";
 
 export default function TrackTable({ tracks }) {
+  const navigate = useNavigate();
+
+  const openTrack = (trackId) => {
+    navigate(`/songs/${trackId}`);
+  };
+
   return (
     <div className="table-wrap">
       <Table className="track-table">
@@ -26,7 +32,20 @@ export default function TrackTable({ tracks }) {
         </TableHeader>
         <TableBody>
           {tracks.map((track) => (
-            <TableRow key={track.id}>
+            <TableRow
+              key={track.id}
+              className="track-row"
+              tabIndex={0}
+              role="link"
+              aria-label={`Open ${track.name}`}
+              onClick={() => openTrack(track.id)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  openTrack(track.id);
+                }
+              }}
+            >
               <TableHead scope="row">
                 <Link to={`/songs/${track.id}`}>{track.name}</Link>
                 {track.album?.name && <span className="mobile-meta">{track.album.name}</span>}
