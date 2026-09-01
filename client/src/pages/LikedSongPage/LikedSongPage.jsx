@@ -36,7 +36,7 @@ export default function LikedSongPage() {
           emptyMessage="No liked Spotify tracks were found."
         />
 
-        {data?.items.length > 0 && (
+        {data && (
           <>
             <Pagination
               className="pagination--top"
@@ -45,7 +45,7 @@ export default function LikedSongPage() {
               total={data.total}
               onPageChange={setPage}
             />
-            {!data.audioFeaturesAvailable && (
+            {data.items.length > 0 && !data.audioFeaturesAvailable && (
               <p className="notice">
                 Key data is unavailable from Spotify right now. Your liked tracks are still listed.
               </p>

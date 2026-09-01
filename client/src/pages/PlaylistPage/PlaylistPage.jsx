@@ -36,7 +36,7 @@ export default function PlaylistPage() {
           emptyMessage="No Spotify playlists were found."
         />
 
-        {data?.items.length > 0 ? (
+        {data ? (
           <>
             <Pagination
               className="pagination--top"
@@ -45,7 +45,7 @@ export default function PlaylistPage() {
               total={data.total}
               onPageChange={setPage}
             />
-            <MediaGrid items={data.items} kind="playlist" />
+            {data.items.length > 0 ? <MediaGrid items={data.items} kind="playlist" /> : null}
             <Pagination
               className="pagination--bottom"
               limit={LIMIT}

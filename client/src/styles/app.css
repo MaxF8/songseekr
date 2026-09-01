@@ -1720,7 +1720,7 @@ h3 {
     right: auto;
     align-self: end;
     justify-self: end;
-    transform: translateY(2rem);
+    transform: translateY(clamp(4.25rem, 6vw, 5rem));
   }
 
   .song-overview {

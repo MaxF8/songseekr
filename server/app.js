@@ -15,6 +15,8 @@ const {
   normalizeAlbum,
   normalizePlaylist,
   normalizePlaylistEntry,
+  normalizeSavedAlbumEntry,
+  normalizeSavedTrackEntry,
   normalizeTrack,
   spotifyRequest,
   spotifyUserRequest,
@@ -28,6 +30,7 @@ const {
   setCookie,
   setTokenCookies,
 } = require("./cookies");
+const { pageItems, pageParameters, pageResponse } = require("./pagination");
 
 const app = express();
 const clientBuild = path.resolve(__dirname, "../client/build");
@@ -106,26 +109,6 @@ function safeReturnPath(value) {
   return typeof value === "string" && value.startsWith("/") && !value.startsWith("//")
     ? value
     : "/";
-}
-
-function pageParameters(req, defaultLimit = 24, maximumLimit = 50) {
-  const requestedLimit = Number.parseInt(req.query.limit, 10);
-  const requestedOffset = Number.parseInt(req.query.offset, 10);
-  return {
-    limit: Number.isFinite(requestedLimit)
-      ? Math.min(Math.max(requestedLimit, 1), maximumLimit)
-      : defaultLimit,
-    offset: Number.isFinite(requestedOffset) ? Math.max(requestedOffset, 0) : 0,
-  };
-}
-
-function pageResponse(body, items) {
-  return {
-    items,
-    total: Number(body?.total) || 0,
-    limit: Number(body?.limit) || items.length,
-    offset: Number(body?.offset) || 0,
-  };
 }
 
 app.get("/api/health", (req, res) => {
@@ -225,8 +208,8 @@ app.get(
     const accessToken = await getClientAccessToken();
     const params = new URLSearchParams({ q: query, type: "album,track", limit: "6" });
     const body = await spotifyRequest(`/search?${params}`, accessToken);
-    const tracks = (body?.tracks?.items || []).map(normalizeTrack).filter((track) => track.id);
-    const albums = (body?.albums?.items || []).map(normalizeAlbum).filter((album) => album.id);
+    const tracks = pageItems(body?.tracks).map(normalizeTrack).filter((track) => track.id);
+    const albums = pageItems(body?.albums).map(normalizeAlbum).filter((album) => album.id);
     const featureResult = await getAudioFeatures(
       tracks.map((track) => track.id),
       accessToken
@@ -258,14 +241,14 @@ app.get(
   "/api/albums/:albumId",
   asyncRoute(async (req, res) => {
     const albumId = assertSpotifyId(req.params.albumId);
-    const { limit, offset } = pageParameters(req, 16, 50);
+    const { limit, offset } = pageParameters(req.query, 16, 50);
     const accessToken = await getClientAccessToken();
     const params = new URLSearchParams({ limit: String(limit), offset: String(offset) });
     const [albumBody, tracksBody] = await Promise.all([
       spotifyRequest(`/albums/${albumId}`, accessToken),
       spotifyRequest(`/albums/${albumId}/tracks?${params}`, accessToken),
     ]);
-    const tracks = (tracksBody?.items || []).map(normalizeTrack).filter((track) => track.id);
+    const tracks = pageItems(tracksBody).map(normalizeTrack).filter((track) => track.id);
     const featureResult = await getAudioFeatures(
       tracks.map((track) => track.id),
       accessToken
@@ -273,7 +256,7 @@ app.get(
 
     res.json({
       album: normalizeAlbum(albumBody),
-      ...pageResponse(tracksBody, addFeatures(tracks, featureResult)),
+      ...pageResponse(tracksBody, addFeatures(tracks, featureResult), { limit, offset }),
       audioFeaturesAvailable: featureResult.available,
     });
   })
@@ -282,31 +265,31 @@ app.get(
 app.get(
   "/api/me/playlists",
   asyncRoute(async (req, res) => {
-    const { limit, offset } = pageParameters(req);
+    const { limit, offset } = pageParameters(req.query);
     const params = new URLSearchParams({ limit: String(limit), offset: String(offset) });
     const body = await spotifyUserRequest(req, res, `/me/playlists?${params}`);
-    const items = (body?.items || []).map(normalizePlaylist).filter((item) => item.id);
-    res.json(pageResponse(body, items));
+    const items = pageItems(body).map(normalizePlaylist).filter((item) => item.id);
+    res.json(pageResponse(body, items, { limit, offset }));
   })
 );
 
 app.get(
   "/api/me/albums",
   asyncRoute(async (req, res) => {
-    const { limit, offset } = pageParameters(req);
+    const { limit, offset } = pageParameters(req.query);
     const params = new URLSearchParams({ limit: String(limit), offset: String(offset) });
     const body = await spotifyUserRequest(req, res, `/me/albums?${params}`);
-    const items = (body?.items || [])
-      .map((entry) => normalizeAlbum(entry.album))
+    const items = pageItems(body)
+      .map(normalizeSavedAlbumEntry)
       .filter((item) => item.id);
-    res.json(pageResponse(body, items));
+    res.json(pageResponse(body, items, { limit, offset }));
   })
 );
 
 app.get(
   "/api/me/tracks",
   asyncRoute(async (req, res) => {
-    const { limit, offset } = pageParameters(req);
+    const { limit, offset } = pageParameters(req.query);
     const params = new URLSearchParams({ limit: String(limit), offset: String(offset) });
     let accessToken = await getUserAccessToken(req, res);
     let body;
@@ -317,15 +300,15 @@ app.get(
       accessToken = await getUserAccessToken(req, res, true);
       body = await spotifyRequest(`/me/tracks?${params}`, accessToken);
     }
-    const tracks = (body?.items || [])
-      .map((entry) => normalizeTrack(entry.track || entry.item))
+    const tracks = pageItems(body)
+      .map(normalizeSavedTrackEntry)
       .filter((track) => track.id);
     const featureResult = await getAudioFeatures(
       tracks.map((track) => track.id),
       accessToken
     );
     res.json({
-      ...pageResponse(body, addFeatures(tracks, featureResult)),
+      ...pageResponse(body, addFeatures(tracks, featureResult), { limit, offset }),
       audioFeaturesAvailable: featureResult.available,
     });
   })
@@ -335,7 +318,7 @@ app.get(
   "/api/playlists/:playlistId/items",
   asyncRoute(async (req, res) => {
     const playlistId = assertSpotifyId(req.params.playlistId);
-    const { limit, offset } = pageParameters(req, 16, 50);
+    const { limit, offset } = pageParameters(req.query, 16, 50);
     const params = new URLSearchParams({ limit: String(limit), offset: String(offset) });
     let accessToken = await getUserAccessToken(req, res);
 
@@ -359,7 +342,7 @@ app.get(
       accessToken = await getUserAccessToken(req, res, true);
       [playlistBody, itemsBody] = await requestPlaylist(accessToken);
     }
-    const tracks = (itemsBody?.items || [])
+    const tracks = pageItems(itemsBody)
       .map(normalizePlaylistEntry)
       .filter((track) => track?.id);
     const featureResult = await getAudioFeatures(
@@ -369,7 +352,7 @@ app.get(
 
     res.json({
       playlist: normalizePlaylist(playlistBody),
-      ...pageResponse(itemsBody, addFeatures(tracks, featureResult)),
+      ...pageResponse(itemsBody, addFeatures(tracks, featureResult), { limit, offset }),
       audioFeaturesAvailable: featureResult.available,
     });
   })

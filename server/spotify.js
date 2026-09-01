@@ -167,7 +167,16 @@ function assertSpotifyId(id) {
   return id;
 }
 
-function normalizeArtist(artist = {}) {
+function objectOrEmpty(value) {
+  return value && typeof value === "object" && !Array.isArray(value) ? value : {};
+}
+
+function arrayOrEmpty(value) {
+  return Array.isArray(value) ? value : [];
+}
+
+function normalizeArtist(artist) {
+  artist = objectOrEmpty(artist);
   return {
     id: artist.id || null,
     name: artist.name || "Unknown artist",
@@ -175,45 +184,51 @@ function normalizeArtist(artist = {}) {
   };
 }
 
-function bestImage(images = []) {
+function bestImage(images) {
+  if (!Array.isArray(images)) return null;
   return images.find((image) => image?.url)?.url || null;
 }
 
-function normalizeTrack(track = {}) {
+function normalizeTrack(track) {
+  track = objectOrEmpty(track);
+  const album = objectOrEmpty(track.album);
+  const hasAlbum = Object.keys(album).length > 0;
+
   return {
     id: track.id || null,
     name: track.name || "Unavailable track",
     durationMs: Number(track.duration_ms) || 0,
-    artists: (track.artists || []).map(normalizeArtist),
-    album: track.album
+    artists: arrayOrEmpty(track.artists).map(normalizeArtist),
+    album: hasAlbum
       ? {
-          id: track.album.id || null,
-          name: track.album.name || "Unknown album",
-          image: bestImage(track.album.images),
+          id: album.id || null,
+          name: album.name || "Unknown album",
+          image: bestImage(album.images),
         }
       : null,
-    image: bestImage(track.album?.images),
+    image: bestImage(album.images),
     spotifyUrl: track.external_urls?.spotify || null,
     available: Boolean(track.id),
   };
 }
 
-function normalizeAlbum(album = {}) {
+function normalizeAlbum(album) {
+  album = objectOrEmpty(album);
   return {
     id: album.id || null,
     name: album.name || "Unknown album",
-    artists: (album.artists || []).map(normalizeArtist),
+    artists: arrayOrEmpty(album.artists).map(normalizeArtist),
     image: bestImage(album.images),
     spotifyUrl: album.external_urls?.spotify || null,
     releaseDate: album.release_date || null,
   };
 }
 
-function normalizePlaylist(playlist = {}) {
+function normalizePlaylist(playlist) {
   // Spotify can leave null entries in a user's playlist collection when a
   // playlist is no longer available. Keep those entries filterable instead
   // of failing the entire paginated response.
-  playlist = playlist || {};
+  playlist = objectOrEmpty(playlist);
   return {
     id: playlist.id || null,
     name: playlist.name || "Untitled playlist",
@@ -232,14 +247,25 @@ function normalizeFeature(feature) {
   };
 }
 
-function normalizePlaylistEntry(entry = {}) {
+function normalizePlaylistEntry(entry) {
+  entry = objectOrEmpty(entry);
   const item = entry.item || entry.track || null;
-  if (!item || item.type === "episode") return null;
+  if (!item || (item.type && item.type !== "track")) return null;
   return normalizeTrack(item);
 }
 
+function normalizeSavedAlbumEntry(entry) {
+  entry = objectOrEmpty(entry);
+  return normalizeAlbum(entry.album);
+}
+
+function normalizeSavedTrackEntry(entry) {
+  entry = objectOrEmpty(entry);
+  return normalizeTrack(entry.track || entry.item);
+}
+
 async function getAudioFeatures(trackIds, accessToken) {
-  const ids = [...new Set(trackIds.filter(Boolean))].slice(0, 100);
+  const ids = [...new Set(arrayOrEmpty(trackIds).filter(Boolean))].slice(0, 100);
   if (ids.length === 0) return { features: {}, available: true };
 
   try {
@@ -248,7 +274,7 @@ async function getAudioFeatures(trackIds, accessToken) {
       accessToken
     );
     const features = {};
-    for (const feature of body?.audio_features || []) {
+    for (const feature of arrayOrEmpty(body?.audio_features)) {
       if (feature?.id) features[feature.id] = normalizeFeature(feature);
     }
     return { features, available: true };
@@ -261,9 +287,10 @@ async function getAudioFeatures(trackIds, accessToken) {
 }
 
 function addFeatures(tracks, featureResult) {
-  return tracks.map((track) => ({
+  const features = objectOrEmpty(featureResult?.features);
+  return arrayOrEmpty(tracks).filter(Boolean).map((track) => ({
     ...track,
-    audioFeature: track.id ? featureResult.features[track.id] || null : null,
+    audioFeature: track.id ? features[track.id] || null : null,
   }));
 }
 
@@ -279,6 +306,8 @@ module.exports = {
   normalizeFeature,
   normalizePlaylist,
   normalizePlaylistEntry,
+  normalizeSavedAlbumEntry,
+  normalizeSavedTrackEntry,
   normalizeTrack,
   spotifyRequest,
   spotifyUserRequest,

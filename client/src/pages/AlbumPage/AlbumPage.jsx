@@ -36,7 +36,7 @@ export default function AlbumPage() {
           emptyMessage="No saved Spotify albums were found."
         />
 
-        {data?.items.length > 0 && (
+        {data && (
           <>
             <Pagination
               className="pagination--top"
@@ -45,7 +45,7 @@ export default function AlbumPage() {
               total={data.total}
               onPageChange={setPage}
             />
-            <MediaGrid items={data.items} kind="album" />
+            {data.items.length > 0 ? <MediaGrid items={data.items} kind="album" /> : null}
             <Pagination
               className="pagination--bottom"
               limit={LIMIT}
