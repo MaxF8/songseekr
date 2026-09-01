@@ -1691,20 +1691,20 @@ h3 {
 }
 
 .fretboard__note {
-  fill: var(--navy);
-  stroke: currentColor;
+  fill: var(--text);
+  stroke: var(--navy);
   stroke-width: 1.8;
   vector-effect: non-scaling-stroke;
 }
 
 .fretboard__note--root {
-  fill: currentColor;
-  stroke: currentColor;
+  fill: var(--link);
+  stroke: var(--link);
 }
 
 .fretboard__note-label {
   /* Keep labels readable inside the neutral note markers in both themes. */
-  fill: var(--text);
+  fill: var(--navy);
   font-family: inherit;
   font-size: 7px;
   font-weight: 700;
@@ -1712,7 +1712,7 @@ h3 {
 }
 
 .fretboard__note-label--root {
-  fill: var(--navy-raised);
+  fill: var(--navy);
 }
 
 .solo-workspace {
@@ -1990,8 +1990,9 @@ h3 {
 }
 
 .solo-fretboard__note--root {
+  fill: var(--link);
   stroke: var(--link);
-  stroke-width: 3;
+  stroke-width: 2.5;
 }
 
 .solo-fretboard__note--target {
@@ -2651,6 +2652,7 @@ h3 {
 
   .solo-fretboard-frame {
     padding: 0.35rem;
+    overflow-x: auto;
   }
 
   .solo-fretboard__string,
@@ -2659,7 +2661,16 @@ h3 {
   }
 
   .solo-fretboard__note {
-    stroke-width: 0.8;
+    stroke-width: 1.5;
+  }
+
+  .solo-fretboard {
+    min-width: 720px;
+    max-width: none;
+  }
+
+  .solo-fretboard__note--root {
+    stroke-width: 3;
   }
 
   .playlist-summary {
@@ -2693,25 +2704,17 @@ h3 {
   }
 
   .pentatonic-boxes {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    gap: 1rem 0.5rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem 0.75rem;
   }
 
   .pentatonic-box {
-    grid-column: span 2;
+    grid-column: auto;
   }
 
-  .pentatonic-box:nth-child(4) {
-    grid-column: 2 / span 2;
-  }
-
+  .pentatonic-box:nth-child(4),
   .pentatonic-box:nth-child(5) {
-    grid-column: 4 / span 2;
-  }
-
-  .pentatonic-box:nth-child(5) {
-    width: auto;
-    justify-self: stretch;
+    grid-column: auto;
   }
 
   .pentatonic-box figcaption {
@@ -2730,7 +2733,7 @@ h3 {
   }
 
   .pentatonic-box .fretboard__note {
-    stroke-width: 1.1;
+    stroke-width: 1.4;
   }
 
   .full-fretboard {

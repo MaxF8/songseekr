@@ -106,13 +106,6 @@ export default function AlbumData() {
                   />
                 }
               />
-              <Pagination
-                className="pagination--bottom"
-                limit={LIMIT}
-                offset={offset}
-                total={data.total}
-                onPageChange={setPage}
-              />
             </section>
             <SpotifyAttribution className="spotify-attribution--page" />
           </div>

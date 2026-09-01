@@ -52,13 +52,6 @@ export default function PlaylistPage() {
                 />
               }
             />
-            <Pagination
-              className="pagination--bottom"
-              limit={LIMIT}
-              offset={offset}
-              total={data.total}
-              onPageChange={setPage}
-            />
             <SpotifyAttribution className="spotify-attribution--page" />
           </>
         ) : null}
