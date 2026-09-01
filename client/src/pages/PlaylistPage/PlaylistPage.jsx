@@ -38,14 +38,20 @@ export default function PlaylistPage() {
 
         {data ? (
           <>
-            <Pagination
-              className="pagination--top"
-              limit={LIMIT}
-              offset={offset}
-              total={data.total}
-              onPageChange={setPage}
+            <MediaGrid
+              items={data.items}
+              kind="playlist"
+              filterLabel={data.items.length > 0 ? "Filter playlists" : undefined}
+              toolbarEnd={
+                <Pagination
+                  className="pagination--top"
+                  limit={LIMIT}
+                  offset={offset}
+                  total={data.total}
+                  onPageChange={setPage}
+                />
+              }
             />
-            {data.items.length > 0 ? <MediaGrid items={data.items} kind="playlist" /> : null}
             <Pagination
               className="pagination--bottom"
               limit={LIMIT}

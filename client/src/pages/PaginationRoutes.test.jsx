@@ -67,5 +67,5 @@ it.each([
   );
 
   expect(mocks.useApiResource).toHaveBeenLastCalledWith(expectedRequest);
-  expect(screen.getByText("Page 5 of 5")).toBeInTheDocument();
+  expect(screen.getAllByText("Page 5 of 5")).toHaveLength(2);
 });

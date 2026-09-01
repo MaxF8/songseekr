@@ -2,7 +2,7 @@ import maxPortrait from "../../assets/pics/max3.jpeg";
 import useArtworkTheme from "../../hooks/useArtworkTheme";
 
 const links = [
-  ["Portfolio", "https://maxfriedman.dev"],
+  ["Portfolio", "https://maxefriedman.com"],
   ["LinkedIn", "https://www.linkedin.com/in/max-friedman/"],
   ["GitHub", "https://github.com/MaxF8"],
 ];

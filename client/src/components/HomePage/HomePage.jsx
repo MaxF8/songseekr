@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 
 import { useAuth } from "../../hooks/useAuth";
@@ -11,8 +12,17 @@ const AUTH_ERRORS = {
 
 export default function HomePage() {
   const { authenticated, error: sessionError } = useAuth();
-  const [searchParams] = useSearchParams();
-  const authError = AUTH_ERRORS[searchParams.get("auth_error")];
+  const [searchParams, setSearchParams] = useSearchParams();
+  const authErrorCode = searchParams.get("auth_error");
+  const authError = authenticated ? undefined : AUTH_ERRORS[authErrorCode];
+
+  useEffect(() => {
+    if (!authenticated || !authErrorCode) return;
+
+    const nextSearchParams = new URLSearchParams(searchParams);
+    nextSearchParams.delete("auth_error");
+    setSearchParams(nextSearchParams, { replace: true });
+  }, [authenticated, authErrorCode, searchParams, setSearchParams]);
 
   useArtworkTheme(undefined, "home-route");
 

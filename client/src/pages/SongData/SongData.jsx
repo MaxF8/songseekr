@@ -1,4 +1,3 @@
-import { ExternalLinkIcon } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 
 import SpotifyAttribution from "../../components/SpotifyAttribution/SpotifyAttribution";
@@ -8,7 +7,6 @@ import {
   PentatonicShapes,
 } from "../../components/PracticeDiagrams/PracticeDiagrams";
 import AsyncState from "../../components/ui/AsyncState";
-import { Button } from "../../components/ui/button";
 import useApiResource from "../../hooks/useApiResource";
 import useArtworkTheme from "../../hooks/useArtworkTheme";
 import { describeKey, getPentatonicPitchClasses } from "../../utils/music";
@@ -161,14 +159,6 @@ export default function SongData() {
                 )}
               </dl>
 
-              {track.spotifyUrl && (
-                <Button asChild variant="outline" className="song-spotify-link">
-                  <a href={track.spotifyUrl} target="_blank" rel="noreferrer">
-                    Open in Spotify
-                    <ExternalLinkIcon aria-hidden="true" />
-                  </a>
-                </Button>
-              )}
             </section>
 
             <div className="song-references">

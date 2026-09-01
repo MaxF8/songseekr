@@ -38,19 +38,24 @@ export default function LikedSongPage() {
 
         {data && (
           <>
-            <Pagination
-              className="pagination--top"
-              limit={LIMIT}
-              offset={offset}
-              total={data.total}
-              onPageChange={setPage}
-            />
             {data.items.length > 0 && !data.audioFeaturesAvailable && (
               <p className="notice">
                 Key data is unavailable from Spotify right now. Your liked tracks are still listed.
               </p>
             )}
-            <TrackTable tracks={data.items} />
+            <TrackTable
+              tracks={data.items}
+              filterLabel="Filter liked songs"
+              toolbarEnd={
+                <Pagination
+                  className="pagination--top"
+                  limit={LIMIT}
+                  offset={offset}
+                  total={data.total}
+                  onPageChange={setPage}
+                />
+              }
+            />
             <Pagination
               className="pagination--bottom"
               limit={LIMIT}

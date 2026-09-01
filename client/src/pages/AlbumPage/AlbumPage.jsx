@@ -38,14 +38,20 @@ export default function AlbumPage() {
 
         {data && (
           <>
-            <Pagination
-              className="pagination--top"
-              limit={LIMIT}
-              offset={offset}
-              total={data.total}
-              onPageChange={setPage}
+            <MediaGrid
+              items={data.items}
+              kind="album"
+              filterLabel={data.items.length > 0 ? "Filter albums" : undefined}
+              toolbarEnd={
+                <Pagination
+                  className="pagination--top"
+                  limit={LIMIT}
+                  offset={offset}
+                  total={data.total}
+                  onPageChange={setPage}
+                />
+              }
             />
-            {data.items.length > 0 ? <MediaGrid items={data.items} kind="album" /> : null}
             <Pagination
               className="pagination--bottom"
               limit={LIMIT}

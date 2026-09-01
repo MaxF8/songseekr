@@ -15,6 +15,20 @@ it("navigates the final valid page", () => {
   expect(onPageChange).toHaveBeenCalledWith(4);
 });
 
+it("offers direct numbered navigation across a long result set", () => {
+  const onPageChange = vi.fn();
+  render(
+    <Pagination limit={24} offset={48} total={504} onPageChange={onPageChange} />
+  );
+
+  expect(screen.getByRole("button", { name: "Page 3, current page" })).toHaveAttribute(
+    "aria-current",
+    "page"
+  );
+  fireEvent.click(screen.getByRole("button", { name: "Go to page 21" }));
+  expect(onPageChange).toHaveBeenCalledWith(21);
+});
+
 it("recovers from an out-of-range page instead of becoming a dead end", () => {
   const onPageChange = vi.fn();
   render(

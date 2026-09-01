@@ -526,20 +526,43 @@ h3 {
 .site-footer {
   display: flex;
   width: 100%;
-  min-height: 94px;
+  min-height: 68px;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   margin: 0;
   border-top: 1px solid var(--border-soft);
   background: var(--navy);
-  color: var(--muted);
+  color: var(--text);
   gap: 2rem;
-  padding: 1.5rem max(3rem, calc((100vw - var(--content)) / 2));
-  font-size: 0.95rem;
+  padding: 1rem max(3rem, calc((100vw - var(--content)) / 2));
+  font-size: 0.9rem;
 }
 
 .site-footer p {
   margin: 0;
+}
+
+.site-footer a {
+  color: inherit;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.site-footer__links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.site-footer__links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
 }
 
 .spotify-attribution {
@@ -971,12 +994,120 @@ h3 {
   display: none;
 }
 
+.collection-filter {
+  display: flex;
+  flex: 0 1 420px;
+  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.collection-filter__control {
+  position: relative;
+  width: min(100%, 420px);
+}
+
+.collection-filter__control > svg {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 0.85rem;
+  width: 1rem;
+  height: 1rem;
+  color: var(--muted);
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.collection-filter__control input {
+  height: 44px;
+  border-color: var(--border);
+  background: var(--navy-raised);
+  color: var(--text);
+  padding-right: 2.75rem;
+  padding-left: 2.5rem;
+}
+
+.collection-filter__control input::placeholder {
+  color: var(--muted);
+}
+
+.collection-filter__control button {
+  position: absolute;
+  top: 50%;
+  right: 0.5rem;
+  color: var(--muted);
+  transform: translateY(-50%);
+}
+
+.collection-filter__empty {
+  margin: 0;
+  border: 1px solid var(--border-subtle);
+  color: var(--muted);
+  padding: 1.5rem;
+}
+
+.track-list-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.track-list-toolbar .pagination--top {
+  flex: none;
+  margin: 0;
+}
+
+.track-list-toolbar .collection-filter {
+  margin: 0;
+}
+
 .pagination {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  flex-wrap: wrap;
+  gap: 0.6rem;
   margin-top: 2rem;
+  color: var(--muted);
+}
+
+.pagination__pages {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.pagination .pagination__page {
+  width: 40px;
+  height: 40px;
+  min-height: 40px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  padding: 0;
+}
+
+.pagination .pagination__page:hover {
+  border-color: var(--link);
+  background: var(--navy-raised);
+}
+
+.pagination .pagination__page[aria-current="page"] {
+  border-color: var(--link);
+  background: var(--navy-raised);
+  color: var(--text);
+}
+
+.pagination__ellipsis {
+  display: inline-grid;
+  width: 22px;
+  height: 40px;
+  place-items: center;
   color: var(--muted);
 }
 
@@ -1074,13 +1205,13 @@ h3 {
 
 .song-hero__title a {
   color: inherit;
-  text-decoration: none;
-}
-
-.song-hero__title a:hover {
   text-decoration: underline;
   text-decoration-thickness: 0.06em;
   text-underline-offset: 0.12em;
+}
+
+.song-hero__title a:hover {
+  text-decoration-color: var(--link);
 }
 
 .song-hero__art {
@@ -1190,6 +1321,11 @@ h3 {
   padding: clamp(9rem, 12vw, 11rem) 0 1rem;
 }
 
+.album-detail__body,
+.playlist-detail__body {
+  padding-top: clamp(4.75rem, 7vw, 6rem);
+}
+
 .song-page__body > .spotify-attribution {
   margin: 0.75rem auto 0;
   padding: 0.5rem;
@@ -1209,11 +1345,11 @@ h3 {
 
 .song-overview {
   display: grid;
-  grid-template-columns: minmax(190px, 0.65fr) minmax(0, 1.8fr) auto;
+  grid-template-columns: minmax(190px, 0.65fr) minmax(0, 1.8fr);
   align-items: start;
   border-bottom: 1px solid var(--border-subtle);
-  gap: clamp(2rem, 5vw, 5rem);
-  padding-bottom: clamp(3rem, 5vw, 4.5rem);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  padding-bottom: clamp(1.75rem, 3vw, 2.5rem);
 }
 
 .song-overview__eyebrow {
@@ -1260,30 +1396,12 @@ h3 {
   text-underline-offset: 3px;
 }
 
-.song-spotify-link,
-.playlist-spotify-link {
-  min-height: 46px;
-  border-color: var(--border) !important;
-  background: transparent !important;
-  color: var(--text) !important;
-  gap: 0.55rem;
-  padding: 0.75rem 1rem;
-  text-decoration: none;
-}
-
-.song-spotify-link:hover,
-.playlist-spotify-link:hover {
-  background: var(--navy-raised) !important;
-}
-
 .playlist-summary {
   display: flex;
   align-items: end;
-  justify-content: space-between;
   border-bottom: 1px solid var(--border-subtle);
-  gap: 2rem;
-  margin-bottom: clamp(3.5rem, 6vw, 5.5rem);
-  padding-bottom: clamp(2.5rem, 4vw, 3.5rem);
+  margin-bottom: 1.25rem;
+  padding-bottom: 1.25rem;
 }
 
 .playlist-summary dl {
@@ -1542,6 +1660,56 @@ h3 {
   color: #171717;
 }
 
+@media (min-width: 1101px) {
+  .reference-item {
+    grid-template-columns: 155px minmax(0, 1fr);
+    gap: 2rem;
+    padding: 1rem 0;
+  }
+
+  .reference-item h3 {
+    font-size: 1.2rem;
+  }
+
+  .chord-diagram {
+    width: min(100%, 920px);
+  }
+
+  .chord-diagram th,
+  .chord-diagram td {
+    padding: 0.65rem 0.4rem;
+  }
+
+  .chord-diagram th {
+    font-size: 0.76rem;
+  }
+
+  .chord-diagram td {
+    font-size: 0.9rem;
+  }
+
+  .pentatonic-boxes {
+    max-width: 1120px;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .pentatonic-box:nth-child(4),
+  .pentatonic-box:nth-child(5) {
+    grid-column: auto;
+  }
+
+  .pentatonic-box figcaption {
+    margin-bottom: 0.25rem;
+    font-size: 0.75rem;
+  }
+
+  .full-fretboard {
+    max-width: 920px;
+    padding: 0.35rem 0;
+  }
+}
+
 .about-page {
   width: 100%;
   min-width: 0;
@@ -1685,6 +1853,10 @@ h3 {
 }
 
 @media (max-width: 960px) {
+  .site-nav {
+    min-height: 76px;
+  }
+
   .desktop-nav-links {
     display: none;
   }
@@ -1703,9 +1875,11 @@ h3 {
 
   .song-hero__inner {
     height: auto;
-    min-height: clamp(300px, 36vw, 360px);
-    grid-template-columns: minmax(0, 1.2fr) minmax(250px, 0.7fr);
-    gap: 2.5rem;
+    min-height: 0;
+    grid-template-columns: minmax(0, 1.2fr) minmax(250px, 320px);
+    gap: 2rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
   }
 
   .playlist-index-hero__inner,
@@ -1718,19 +1892,25 @@ h3 {
     position: relative;
     top: auto;
     right: auto;
+    width: min(100%, 320px);
     align-self: end;
     justify-self: end;
-    transform: translateY(clamp(4.25rem, 6vw, 5rem));
+    transform: translateY(3.75rem);
+  }
+
+  .song-page__body {
+    padding-top: 4.5rem;
+  }
+
+  .playlist-summary {
+    margin-bottom: 1.25rem;
+    padding-bottom: 1.25rem;
   }
 
   .song-overview {
     grid-template-columns: minmax(180px, 0.55fr) minmax(0, 1.45fr);
   }
 
-  .song-overview .song-spotify-link {
-    grid-column: 2;
-    justify-self: start;
-  }
 }
 
 @media (max-width: 680px) {
@@ -1833,13 +2013,8 @@ h3 {
 
   .song-overview {
     grid-template-columns: 1fr;
-    gap: 2rem;
-    padding-bottom: 3rem;
-  }
-
-  .song-overview .song-spotify-link {
-    grid-column: auto;
-    justify-self: start;
+    gap: 1.25rem;
+    padding-bottom: 2rem;
   }
 
   .song-facts {
@@ -1849,8 +2024,8 @@ h3 {
   .playlist-summary {
     align-items: flex-start;
     flex-direction: column;
-    margin-bottom: 3rem;
-    padding-bottom: 2.5rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1.25rem;
   }
 
   .playlist-summary dl {
@@ -1861,10 +2036,6 @@ h3 {
 
   .album-summary dl div:first-child {
     grid-column: 1 / -1;
-  }
-
-  .playlist-spotify-link {
-    align-self: flex-start;
   }
 
   .reference-list {
@@ -1966,10 +2137,14 @@ h3 {
   }
 
   .site-footer {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 0.4rem;
+    align-items: center;
+    flex-direction: row;
+    gap: 1rem;
     padding: 1.25rem 1rem;
+  }
+
+  .site-footer__links {
+    gap: 0.85rem;
   }
 
   .home-hero {
@@ -2051,12 +2226,40 @@ h3 {
   }
 
   .pagination {
-    gap: 0.6rem;
+    gap: 0.45rem;
   }
 
   .pagination .button {
     min-height: 44px;
     padding: 0.7rem 0.85rem;
+  }
+
+  .pagination .pagination__page {
+    width: 36px;
+    height: 36px;
+    min-height: 36px;
+    padding: 0;
+  }
+
+  .pagination__ellipsis {
+    width: 16px;
+    height: 36px;
+  }
+
+  .collection-filter {
+    flex: 1 1 auto;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .track-list-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .collection-filter__control {
+    width: 100%;
   }
 
   .about-page__body {

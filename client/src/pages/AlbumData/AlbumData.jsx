@@ -1,11 +1,9 @@
-import { ExternalLinkIcon } from "lucide-react";
 import { useParams } from "react-router-dom";
 
 import SpotifyAttribution from "../../components/SpotifyAttribution/SpotifyAttribution";
 import AsyncState from "../../components/ui/AsyncState";
 import Pagination from "../../components/ui/Pagination";
 import TrackTable from "../../components/ui/TrackTable";
-import { Button } from "../../components/ui/button";
 import useApiResource from "../../hooks/useApiResource";
 import useArtworkTheme from "../../hooks/useArtworkTheme";
 import usePage from "../../hooks/usePage";
@@ -40,7 +38,15 @@ export default function AlbumData() {
           <header className="song-hero album-hero">
             <div className="song-hero__inner">
               <div className="song-hero__copy">
-                <h1 className={titleClassName}>{album.name}</h1>
+                <h1 className={titleClassName}>
+                  {album.spotifyUrl ? (
+                    <a href={album.spotifyUrl} target="_blank" rel="noreferrer">
+                      {album.name}
+                    </a>
+                  ) : (
+                    album.name
+                  )}
+                </h1>
               </div>
 
               <div className="song-hero__art">
@@ -76,32 +82,32 @@ export default function AlbumData() {
                   <dd>{data.total}</dd>
                 </div>
               </dl>
-
-              {album.spotifyUrl ? (
-                <Button asChild variant="outline" className="playlist-spotify-link">
-                  <a href={album.spotifyUrl} target="_blank" rel="noreferrer">
-                    Open in Spotify
-                    <ExternalLinkIcon aria-hidden="true" />
-                  </a>
-                </Button>
-              ) : null}
             </section>
 
             {!data.audioFeaturesAvailable && (
               <p className="notice">Spotify did not provide key data for these tracks.</p>
             )}
 
-            <section className="playlist-tracks" aria-labelledby="album-tracks-heading">
-              <div className="section-heading section-heading--row">
-                <h2 id="album-tracks-heading">Tracks</h2>
-                <span>{data.total} total</span>
-              </div>
+            <section className="playlist-tracks" aria-label="Album tracks">
               <AsyncState
                 empty={data.items.length === 0}
                 emptyMessage="No available tracks were found on this album page."
               />
-              {data.items.length > 0 ? <TrackTable tracks={data.items} /> : null}
+              <TrackTable
+                tracks={data.items}
+                filterLabel={data.items.length > 0 ? "Filter album tracks" : undefined}
+                toolbarEnd={
+                  <Pagination
+                    className="pagination--top"
+                    limit={LIMIT}
+                    offset={offset}
+                    total={data.total}
+                    onPageChange={setPage}
+                  />
+                }
+              />
               <Pagination
+                className="pagination--bottom"
                 limit={LIMIT}
                 offset={offset}
                 total={data.total}

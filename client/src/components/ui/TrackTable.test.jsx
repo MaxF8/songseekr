@@ -53,3 +53,39 @@ it("opens the track when another part of its row is clicked", () => {
   expect(screen.getByTestId("location")).toHaveTextContent("/songs/track123");
   expect(row).toBeInTheDocument();
 });
+
+it("filters the visible track page by song, artist, album, or key", () => {
+  render(
+    <MemoryRouter>
+      <TrackTable
+        filterLabel="Filter liked songs"
+        tracks={[
+          {
+            id: "track123",
+            name: "Test Song",
+            artists: [{ name: "First Artist" }],
+            album: { name: "First Album" },
+            durationMs: 185000,
+            audioFeature: { key: 9, mode: 1 },
+          },
+          {
+            id: "track456",
+            name: "Another Song",
+            artists: [{ name: "Second Artist" }],
+            album: { name: "Second Album" },
+            durationMs: 210000,
+            audioFeature: { key: 0, mode: 0 },
+          },
+        ]}
+      />
+    </MemoryRouter>
+  );
+
+  fireEvent.change(screen.getByRole("searchbox", { name: "Filter liked songs" }), {
+    target: { value: "second album" },
+  });
+
+  expect(screen.queryByRole("link", { name: "Test Song" })).not.toBeInTheDocument();
+  expect(screen.getByRole("link", { name: "Another Song" })).toBeInTheDocument();
+  expect(screen.queryByText(/shown on this page/i)).not.toBeInTheDocument();
+});
