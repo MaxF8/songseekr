@@ -442,7 +442,8 @@ h3 {
 .mobile-sheet__close {
   min-width: 36px;
   min-height: 36px;
-  border: 1px solid var(--border);
+  border-color: transparent;
+  background: #38445d !important;
   color: var(--text);
 }
 
@@ -477,7 +478,8 @@ h3 {
   justify-content: flex-start;
   border: 1px solid var(--border);
   border-radius: 8px;
-  background: var(--navy);
+  border-color: transparent;
+  background: #38445d;
   color: var(--text);
   padding: 0.625rem 0.75rem;
   font-size: 0.82rem;
@@ -487,8 +489,8 @@ h3 {
 
 .mobile-sheet__links .nav-link:hover,
 .mobile-sheet__links .nav-link--active {
-  border-color: var(--link);
-  background: var(--navy-raised);
+  border-color: transparent;
+  background: #4a5570;
   color: var(--text);
 }
 
@@ -508,19 +510,43 @@ h3 {
   min-height: 36px;
   flex: 0 0 36px;
   align-self: center;
+  border-color: transparent;
+  background: #38445d !important;
+  color: var(--text) !important;
+}
+
+.mobile-sheet__close:hover,
+.theme-toggle--mobile:hover {
+  background: #4a5570 !important;
+  color: var(--text) !important;
 }
 
 .mobile-sheet__footer .nav-button {
   width: 100%;
   min-height: 40px;
   flex: 1;
-  border: 1px solid var(--border);
-  background: var(--navy) !important;
+  border-color: transparent;
+  background: #38445d !important;
   color: var(--text) !important;
 }
 
 .mobile-sheet__footer .nav-button:hover {
-  background: var(--navy-raised) !important;
+  background: #4a5570 !important;
+}
+
+:root[data-theme="light"] .mobile-sheet__close,
+:root[data-theme="light"] .theme-toggle--mobile,
+:root[data-theme="light"] .mobile-sheet__links .nav-link,
+:root[data-theme="light"] .mobile-sheet__footer .nav-button {
+  background: #e2e7ef !important;
+}
+
+:root[data-theme="light"] .mobile-sheet__close:hover,
+:root[data-theme="light"] .theme-toggle--mobile:hover,
+:root[data-theme="light"] .mobile-sheet__links .nav-link:hover,
+:root[data-theme="light"] .mobile-sheet__links .nav-link--active,
+:root[data-theme="light"] .mobile-sheet__footer .nav-button:hover {
+  background: #d5dce8 !important;
 }
 
 .site-footer {
@@ -577,11 +603,28 @@ h3 {
 
 .spotify-attribution {
   display: flex;
-  min-width: 110px;
+  min-width: 0;
   align-items: center;
   justify-content: center;
+  gap: 1rem;
   flex-shrink: 0;
   padding: 15px;
+}
+
+.spotify-attribution .brand {
+  padding-right: 1.15rem;
+  margin-right: -0.8rem;
+  font-size: clamp(1.65rem, 2.2vw, 1.9rem);
+}
+
+.spotify-attribution__separator {
+  color: var(--muted);
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.spotify-attribution > a {
+  display: block;
 }
 
 .spotify-attribution img {
@@ -887,7 +930,27 @@ h3 {
 
 .media-card__link {
   display: block;
+  border-radius: 5px;
   text-decoration: none;
+  transition: transform 150ms ease;
+}
+
+.media-card__link:hover,
+.media-card__link:focus-visible {
+  transform: translateY(-3px);
+}
+
+.media-card__link:hover .media-card__image,
+.media-card__link:hover .media-card__placeholder,
+.media-card__link:focus-visible .media-card__image,
+.media-card__link:focus-visible .media-card__placeholder {
+  border-color: var(--link);
+  box-shadow: 0 0 0 2px rgb(143 165 255 / 18%);
+}
+
+.media-card__link:hover .media-card__title,
+.media-card__link:focus-visible .media-card__title {
+  color: var(--link);
 }
 
 .media-card__image,
@@ -1308,16 +1371,27 @@ h3 {
   min-width: 0;
   min-height: 52px;
   border: 1px solid var(--border);
-  background: var(--surface-dark);
+  background: #38445d;
   color: var(--text);
   white-space: nowrap;
 }
 
 .home-index__body .home-action-button:hover,
 .home-index__body .home-search-button:hover {
-  border-color: var(--link);
-  background: var(--navy-raised);
+  border-color: transparent;
+  background: #4a5570;
   color: var(--text);
+}
+
+:root[data-theme="light"] .home-index__body .home-action-button,
+:root[data-theme="light"] .home-index__body .home-search-button {
+  border-color: transparent;
+  background: #e2e7ef;
+}
+
+:root[data-theme="light"] .home-index__body .home-action-button:hover,
+:root[data-theme="light"] .home-index__body .home-search-button:hover {
+  background: #d5dce8;
 }
 
 .not-found-page .home-index-hero {
