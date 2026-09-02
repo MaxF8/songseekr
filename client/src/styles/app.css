@@ -2220,9 +2220,37 @@ h3 {
     font-size: 0.9rem;
   }
 
+  .pentatonic-box figcaption {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .pentatonic-box .fretboard__note-label {
+    font-size: 9px;
+  }
+
   .full-fretboard {
     max-width: 920px;
     padding: 0.35rem 0;
+  }
+}
+
+@media (min-width: 1101px) and (max-width: 1699px) {
+  .pentatonic-boxes {
+    max-width: 1100px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.25rem 1.5rem;
+  }
+
+  .pentatonic-box:nth-child(4),
+  .pentatonic-box:nth-child(5) {
+    grid-column: auto;
+  }
+}
+
+@media (min-width: 1700px) {
+  .pentatonic-boxes {
+    max-width: 1120px;
   }
 }
 

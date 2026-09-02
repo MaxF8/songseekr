@@ -62,7 +62,7 @@ export default function HomePage() {
                   <Link className="button button--primary home-action-button" to="/playlists">
                     Playlists
                   </Link>
-                  <Link className="button button--primary home-action-button" to="/saved-albums">
+                  <Link className="button button--primary home-action-button" to="/albums">
                     Albums
                   </Link>
                   <Link className="button button--primary home-action-button" to="/liked-songs">

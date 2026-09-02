@@ -68,17 +68,18 @@ function AppLayout() {
             <Route path="/search" element={<Search />} />
             <Route path="/songs/:trackId" element={<SongData />} />
             <Route path="/albums/:albumId" element={<AlbumData />} />
+            <Route path="/saved-albums" element={<Navigate to="/albums" replace />} />
             <Route path="/about" element={<About />} />
 
             <Route element={<ProtectedRoute />}>
               <Route path="/playlists" element={<PlaylistPage />} />
               <Route path="/playlists/:playlistId" element={<PlaylistData />} />
-              <Route path="/saved-albums" element={<AlbumPage />} />
+              <Route path="/albums" element={<AlbumPage />} />
               <Route path="/liked-songs" element={<LikedSongPage />} />
             </Route>
 
             <Route path="/songData" element={<Navigate to="/search" replace />} />
-            <Route path="/albumData" element={<Navigate to="/saved-albums" replace />} />
+            <Route path="/albumData" element={<Navigate to="/albums" replace />} />
             <Route path="/playlistData" element={<Navigate to="/playlists" replace />} />
             <Route path="/likedSongs" element={<Navigate to="/liked-songs" replace />} />
             <Route path="*" element={<NotFound />} />

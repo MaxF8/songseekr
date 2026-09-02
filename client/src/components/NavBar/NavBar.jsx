@@ -50,7 +50,7 @@ export default function NavBar() {
     ? [
         ["/", "Home"],
         ["/playlists", "Playlists"],
-        ["/saved-albums", "Albums"],
+        ["/albums", "Albums"],
         ["/liked-songs", "Liked Songs"],
         ["/search", "Search"],
         ["/about", "About"],
