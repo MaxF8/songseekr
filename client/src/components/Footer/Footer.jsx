@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 export default function Footer() {
   return (
     <footer className="site-footer">
-      <p>Created by Max Friedman</p>
+      <p>
+        Created by <strong>Max Friedman</strong>
+      </p>
       <nav className="site-footer__links" aria-label="Creator links">
         <Link to="/about">
           About Me <span aria-hidden="true">›</span>
