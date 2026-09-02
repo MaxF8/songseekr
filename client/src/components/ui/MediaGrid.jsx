@@ -50,7 +50,7 @@ export default function MediaGrid({ filterLabel, items, kind, toolbarEnd }) {
               </Link>
               <p className="media-card__meta">
                 {kind === "playlist"
-                  ? [item.owner, item.total != null ? `${item.total} items` : null]
+                  ? [item.owner, item.total != null ? `${item.total} tracks` : null]
                       .filter(Boolean)
                       .join(" · ")
                   : artistNames(item.artists)}

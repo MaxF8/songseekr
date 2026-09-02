@@ -268,7 +268,24 @@ app.get(
     const { limit, offset } = pageParameters(req.query);
     const params = new URLSearchParams({ limit: String(limit), offset: String(offset) });
     const body = await spotifyUserRequest(req, res, `/me/playlists?${params}`);
-    const items = pageItems(body).map(normalizePlaylist).filter((item) => item.id);
+    const items = (await Promise.all(
+      pageItems(body).map(async (playlist) => {
+        const item = normalizePlaylist(playlist);
+        if (!item.id || item.total !== 0) return item;
+
+        try {
+          const itemPage = await spotifyUserRequest(
+            req,
+            res,
+            `/playlists/${item.id}/items?limit=1&offset=0`
+          );
+          const total = Number(itemPage?.total);
+          return Number.isSafeInteger(total) && total >= 0 ? { ...item, total } : item;
+        } catch {
+          return item;
+        }
+      })
+    )).filter((item) => item.id);
     res.json(pageResponse(body, items, { limit, offset }));
   })
 );

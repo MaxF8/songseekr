@@ -25,3 +25,16 @@ it("filters media cards by title and owner metadata", () => {
   expect(screen.getByRole("link", { name: /Night songs/ })).toBeInTheDocument();
   expect(screen.queryByText(/shown on this page/i)).not.toBeInTheDocument();
 });
+
+it("labels playlist totals as tracks", () => {
+  render(
+    <MemoryRouter>
+      <MediaGrid
+        kind="playlist"
+        items={[{ id: "one", name: "Catchy Mix", owner: "Spotify", total: 50 }]}
+      />
+    </MemoryRouter>
+  );
+
+  expect(screen.getByText("Spotify · 50 tracks")).toBeInTheDocument();
+});

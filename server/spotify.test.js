@@ -58,6 +58,14 @@ test("playlist normalization tolerates unavailable collection entries", () => {
   });
 });
 
+test("playlist normalization prefers the track count when Spotify totals disagree", () => {
+  assert.equal(
+    normalizePlaylist({ items: { total: 0 }, tracks: { total: 50 } }).total,
+    50
+  );
+  assert.equal(normalizePlaylist({ items: { total: 12 } }).total, 12);
+});
+
 test("track and feature normalization use safe fallbacks", () => {
   assert.deepEqual(normalizeFeature({ key: -1, mode: 1 }), null);
   assert.deepEqual(normalizeFeature({ key: 9, mode: 0 }), {

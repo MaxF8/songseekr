@@ -29,7 +29,7 @@ test("every paginated API survives unavailable Spotify entries on late pages", a
     }
     if (url.includes("/me/playlists?")) {
       return spotifyResponse({
-        items: [null, { id: "playlist1", images: null }],
+        items: [null, { id: "playlist1", images: null, tracks: { total: 0 } }],
         total: 120,
         limit: 24,
         offset: 96,
@@ -104,6 +104,7 @@ test("every paginated API survives unavailable Spotify entries on late pages", a
       assert.equal(response.status, 200, `${path}: ${JSON.stringify(body)}`);
       assert.deepEqual(body.items.map((item) => item.id), [expectedId]);
       assert.ok(body.total > 0);
+      if (route === "/api/me/playlists") assert.equal(body.items[0].total, 80);
     }
   }
 

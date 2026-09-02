@@ -235,7 +235,7 @@ function normalizePlaylist(playlist) {
     image: bestImage(playlist.images),
     spotifyUrl: playlist.external_urls?.spotify || null,
     owner: playlist.owner?.display_name || null,
-    total: playlist.items?.total ?? playlist.tracks?.total ?? null,
+    total: playlist.tracks?.total ?? playlist.items?.total ?? null,
   };
 }
 
