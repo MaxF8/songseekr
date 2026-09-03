@@ -1443,6 +1443,7 @@ h3 {
 }
 
 .song-detail-page .song-hero__art {
+  top: 1rem;
   width: min(100%, 280px);
 }
 
