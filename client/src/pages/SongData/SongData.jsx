@@ -39,6 +39,12 @@ export default function SongData() {
   ]
     .filter(Boolean)
     .join(" ");
+  const describedKey = describeKey(track?.audioFeature);
+  const keyQuality = track?.audioFeature
+    ? track.audioFeature.mode === 1
+      ? "Major"
+      : "Minor"
+    : null;
 
   useArtworkTheme(track?.image, "song-route");
 
@@ -81,28 +87,12 @@ export default function SongData() {
 
           <div className="song-page__body song-detail__body">
             <section className="song-overview" aria-label="Track details">
-              <div>
-                <p className="song-overview__eyebrow">Track details</p>
-                <p className="song-overview__artists">
-                  <span>{track.artists.length === 1 ? "Artist: " : "Artists: "}</span>
-                  <ArtistLinks artists={track.artists} />
-                </p>
-              </div>
+              <p className="song-overview__eyebrow">Track details</p>
 
               <dl className="song-facts">
                 <div>
-                  <dt>Key</dt>
-                  <dd>{describeKey(track.audioFeature).replace(/ major| minor/, "")}</dd>
-                </div>
-                <div>
-                  <dt>Mode</dt>
-                  <dd>
-                    {track.audioFeature
-                      ? track.audioFeature.mode === 1
-                        ? "Major"
-                        : "Minor"
-                      : "Unavailable"}
-                  </dd>
+                  <dt>{track.artists.length === 1 ? "Artist" : "Artists"}</dt>
+                  <dd><ArtistLinks artists={track.artists} /></dd>
                 </div>
                 {track.album?.name && (
                   <div>
@@ -116,6 +106,14 @@ export default function SongData() {
                     </dd>
                   </div>
                 )}
+                <div>
+                  <dt>Key</dt>
+                  <dd>
+                    {describedKey === "Unavailable"
+                      ? describedKey
+                      : `${describedKey.replace(/ major| minor/, "")} · ${keyQuality}`}
+                  </dd>
+                </div>
               </dl>
 
             </section>
