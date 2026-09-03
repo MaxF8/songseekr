@@ -92,7 +92,7 @@ export default function NavBar() {
           </SheetTrigger>
           <SheetContent side="right" showCloseButton={false} className="mobile-sheet">
             <SheetHeader className="mobile-sheet__header">
-              <SheetTitle className="mobile-sheet__eyebrow">Navigation</SheetTitle>
+              <SheetTitle className="sr-only">Menu</SheetTitle>
               <SheetDescription className="sr-only">
                 Navigate around songseekr.
               </SheetDescription>
