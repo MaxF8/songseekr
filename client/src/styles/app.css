@@ -1704,7 +1704,7 @@ h3 {
 
 .pentatonic-boxes {
   display: grid;
-  max-width: 1050px;
+  max-width: 1150px;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 2rem 1.25rem;
 }
