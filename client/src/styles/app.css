@@ -2220,26 +2220,6 @@ h3 {
     font-size: 0.9rem;
   }
 
-  .pentatonic-boxes {
-    max-width: 1120px;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 0.75rem;
-  }
-
-  .pentatonic-box:nth-child(4),
-  .pentatonic-box:nth-child(5) {
-    grid-column: auto;
-  }
-
-  .pentatonic-box figcaption {
-    margin-bottom: 0.25rem;
-    font-size: 0.75rem;
-  }
-
-  .pentatonic-box .fretboard__note-label {
-    font-size: 7px;
-  }
-
   .full-fretboard {
     max-width: 920px;
     padding: 0.35rem 0;
