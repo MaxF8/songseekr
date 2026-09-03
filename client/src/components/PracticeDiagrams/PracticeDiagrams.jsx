@@ -28,6 +28,7 @@ function FretboardSvg({
   preserveAspectRatio = "xMinYMid meet",
   startFret,
   showInlays = false,
+  noteRadius = 8,
   uniformWidth = false,
 }) {
   const fretCount = endFret - startFret + 1;
@@ -110,7 +111,7 @@ function FretboardSvg({
               className={note.root ? "fretboard__note fretboard__note--root" : "fretboard__note"}
               cx={x}
               cy={y}
-              r="8"
+              r={noteRadius}
             />
             {labelMode !== "dots" ? (
               <text
@@ -185,6 +186,7 @@ export function PentatonicShapes({ audioFeature, labelMode = "dots" }) {
             endFret={box.endFret}
             labelMode={labelMode}
             notes={addScaleLabels(audioFeature, box.notes)}
+            noteRadius={10}
             uniformWidth
             label={`Pentatonic position ${box.position}, frets ${box.startFret} through ${box.endFret}`}
           />

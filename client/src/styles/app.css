@@ -1799,7 +1799,7 @@ h3 {
   /* Keep labels readable inside the neutral note markers in both themes. */
   fill: var(--navy);
   font-family: inherit;
-  font-size: 7px;
+  font-size: 9px;
   font-weight: 700;
   pointer-events: none;
 }
