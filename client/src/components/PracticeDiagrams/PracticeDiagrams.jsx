@@ -186,7 +186,7 @@ export function PentatonicShapes({ audioFeature, labelMode = "dots" }) {
             endFret={box.endFret}
             labelMode={labelMode}
             notes={addScaleLabels(audioFeature, box.notes)}
-            noteRadius={10}
+            noteRadius={12}
             uniformWidth
             label={`Pentatonic position ${box.position}, frets ${box.startFret} through ${box.endFret}`}
           />
